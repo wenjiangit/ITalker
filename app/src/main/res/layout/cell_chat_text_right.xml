@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="@dimen/len_4"
+    android:paddingBottom="@dimen/len_4"
+    android:paddingEnd="@dimen/len_16"
+    android:paddingStart="@dimen/len_56"
+    android:orientation="vertical">
+
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/portraitSize"
+        android:paddingStart="@dimen/len_16"
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/len_20"
+        android:background="@drawable/cell_chat_bg"
+        >
+
+        <TextView
+            android:textColor="@color/textPrimary"
+            android:layout_gravity="center_vertical|end"
+            android:id="@+id/txt_content"
+            tools:text="@string/app_name"
+            android:layout_marginEnd="@dimen/len_24"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
+
+
+    <com.example.commom.widget.PortraitView
+        android:layout_gravity="end"
+        android:src="@drawable/default_portrait"
+        android:id="@+id/im_portrait"
+        android:padding="1px"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="@dimen/len_2"
+        android:layout_width="@dimen/portraitSize"
+        android:layout_height="@dimen/portraitSize" />
+
+    <net.qiujuer.genius.ui.widget.Loading
+        android:id="@+id/loading"
+        android:layout_gravity="end"
+        app:gAutoRun="false"
+        android:padding="1px"
+        app:gForegroundColor="@color/colorAccent"
+        android:background="@null"
+        app:gProgressFloat="1"
+        app:gForegroundLineSize="1dp"
+        android:layout_width="@dimen/portraitSize"
+        android:layout_height="@dimen/portraitSize" />
+
+</FrameLayout>

@@ -1,0 +1,74 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+    defaultConfig {
+        applicationId "com.douliu.italker"
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [
+                GETUI_APP_ID    : "aItu6HBrIB8cvhmrJeRBA3",
+                GETUI_APP_KEY   : "jeEqIGB5QC8CFIsx5F4nw3",
+                GETUI_APP_SECRET: "cpxWhT2CQh5bZlr10cdjo6"
+        ]
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    aaptOptions {
+        cruncherEnabled = false
+    }
+}
+
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile project(':factory')
+
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
+    compile "com.android.support:recyclerview-v7:$rootProject.ext.supportVersion"
+    compile "com.android.support:design:$rootProject.ext.supportVersion"
+    compile "com.android.support:support-v4:$rootProject.ext.supportVersion"
+    compile "net.qiujuer.genius:ui:$rootProject.ext.geniusVersion"
+    compile "net.qiujuer.genius:res:$rootProject.ext.geniusVersion"
+    //图片加载库
+    compile "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
+    //圆形图片库
+    compile "de.hdodenhof:circleimageview:$rootProject.ext.circleVersion"
+
+    //依赖注解库
+    compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
+
+    //图片裁剪库
+    compile "com.github.yalantis:ucrop:$rootProject.ext.ucropVersion"
+
+    //动态权限申请库
+    compile "pub.devrel:easypermissions:$rootProject.ext.easyPMVersion"
+
+    //个推sdk
+    compile "com.getui:sdk:$rootProject.ext.getuiVersion"
+
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
+
+    compile 'com.android.support:support-v4:25.3.1'
+}
