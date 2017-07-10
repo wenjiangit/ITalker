@@ -192,46 +192,42 @@ public class Session extends BaseDbModel<Session> {
         Message message;
         if (receiverType == Message.RECEIVER_TYPE_GROUP) {
             message = MessageHelper.findLastWithGroup(id);
+            Group group;
             if (message == null) {
                 if (!TextUtils.isEmpty(picture) && !TextUtils.isEmpty(title)) {
                     return;
                 }
-                Group group = GroupHelper.findFromLocal(id);
-                this.picture = group.getPicture();
-                this.title = group.getName();
+                group = GroupHelper.findFromLocal(id);
                 this.modifyAt = new Date();
             } else {
-                Group group = message.getGroup();
+                group = message.getGroup();
                 group.load();
                 this.content = message.getSampleContent();
-                this.title = group.getName();
-                this.picture = group.getPicture();
                 this.message = message;
                 this.modifyAt = message.getCreateAt();
             }
+            this.picture = group.getPicture();
+            this.title = group.getName();
 
         } else {
             message = MessageHelper.findLastWithUser(id);
+            User user;
             if (message == null) {
                 if (!TextUtils.isEmpty(picture) && !TextUtils.isEmpty(title)) {
                     return;
                 }
-                User user = UserHelper.findFromLocal(id);
-                this.picture = user.getPortrait();
-                this.title = user.getName();
+                user = UserHelper.findFromLocal(id);
                 this.modifyAt = new Date();
             } else {
-                User sender = message.getSender();
-                sender.load();
+                user = message.getOther();
+                user.load();
                 this.content = message.getSampleContent();
-                this.title = sender.getName();
-                this.picture = sender.getPortrait();
                 this.message = message;
                 this.modifyAt = message.getCreateAt();
             }
+            this.picture = user.getPortrait();
+            this.title = user.getName();
         }
-
-
     }
 
 
