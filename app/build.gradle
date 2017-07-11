@@ -16,6 +16,7 @@ android {
                 GETUI_APP_KEY   : "jeEqIGB5QC8CFIsx5F4nw3",
                 GETUI_APP_SECRET: "cpxWhT2CQh5bZlr10cdjo6"
         ]
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -68,7 +69,8 @@ dependencies {
     compile "com.getui:sdk:$rootProject.ext.getuiVersion"
 
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
 
     compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:support-vector-drawable:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.1'
 }

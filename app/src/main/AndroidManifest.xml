@@ -80,10 +80,13 @@
             android:theme="@style/AppTheme.Message" />
         <activity
             android:name=".activities.PersonalActivity"
-            android:screenOrientation="portrait"
             android:label="@string/action_person"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.TransStatusBar" />
-
+        <activity android:name=".activities.SettingsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.TransStatusBar"
+            />
     </application>
 
 </manifest>

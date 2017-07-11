@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.douliu.italker.R;
 import com.douliu.italker.activities.MessageActivity;
 import com.example.commom.app.PresenterFragment;
+import com.example.commom.utils.TimeUtils;
 import com.example.commom.widget.EmptyView;
 import com.example.commom.widget.PortraitView;
 import com.example.commom.widget.recycler.RecyclerAdapter;
@@ -108,7 +109,7 @@ public class ActiveFragment extends PresenterFragment<SessionContract.Presenter>
             mPortraitView.setup(Glide.with(ActiveFragment.this), session.getPicture());
             mTxtName.setText(session.getTitle());
             mTxtContent.setText(TextUtils.isEmpty(session.getContent()) ? "" : session.getContent());
-            mTxtTime.setText(DateFormat.format("HH:mm", session.getModifyAt()));
+            mTxtTime.setText(TimeUtils.getFriendlyTimeSpanByNow(session.getModifyAt()));
         }
     }
 

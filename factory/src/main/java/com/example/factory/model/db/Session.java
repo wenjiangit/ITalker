@@ -188,45 +188,61 @@ public class Session extends BaseDbModel<Session> {
         return identify;
     }
 
+    /**
+     * 通过聊天消息将会话更新到最新状态
+     */
     public void updateToNow() {
         Message message;
         if (receiverType == Message.RECEIVER_TYPE_GROUP) {
             message = MessageHelper.findLastWithGroup(id);
-            Group group;
             if (message == null) {
-                if (!TextUtils.isEmpty(picture) && !TextUtils.isEmpty(title)) {
-                    return;
+                if (TextUtils.isEmpty(picture) || TextUtils.isEmpty(title)) {
+                    //基本信息没有,则尝试去获取
+                    Group group = GroupHelper.findFromLocal(id);
+                    if (group != null) {
+                        this.picture = group.getPicture();
+                        this.title = group.getName();
+                    }
                 }
-                group = GroupHelper.findFromLocal(id);
+                this.content = "";
+                this.message = null;
                 this.modifyAt = new Date();
             } else {
-                group = message.getGroup();
-                group.load();
+                if (TextUtils.isEmpty(picture) || TextUtils.isEmpty(title)) {
+                    //基本信息没有,则尝试去获取
+                    Group group = message.getGroup();
+                    group.load();
+                    this.picture = group.getPicture();
+                    this.title = group.getName();
+                }
                 this.content = message.getSampleContent();
                 this.message = message;
                 this.modifyAt = message.getCreateAt();
             }
-            this.picture = group.getPicture();
-            this.title = group.getName();
-
         } else {
             message = MessageHelper.findLastWithUser(id);
-            User user;
             if (message == null) {
-                if (!TextUtils.isEmpty(picture) && !TextUtils.isEmpty(title)) {
-                    return;
+                if (TextUtils.isEmpty(picture) || TextUtils.isEmpty(title)) {
+                    User user = UserHelper.findFromLocal(id);
+                    if (user != null) {
+                        this.picture = user.getPortrait();
+                        this.title = user.getName();
+                    }
                 }
-                user = UserHelper.findFromLocal(id);
+                this.message = null;
+                this.content = "";
                 this.modifyAt = new Date();
             } else {
-                user = message.getOther();
-                user.load();
+                if (TextUtils.isEmpty(picture) || TextUtils.isEmpty(title)) {
+                    User other = message.getOther();
+                    other.load();
+                    this.picture = other.getPortrait();
+                    this.title = other.getName();
+                }
                 this.content = message.getSampleContent();
                 this.message = message;
                 this.modifyAt = message.getCreateAt();
             }
-            this.picture = user.getPortrait();
-            this.title = user.getName();
         }
     }
 

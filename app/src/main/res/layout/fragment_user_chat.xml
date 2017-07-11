@@ -78,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white_alpha_224"
-        android:elevation="2dp"
+        android:elevation="@dimen/len_4"
         android:orientation="horizontal"
         android:outlineProvider="bounds"
         tools:targetApi="lollipop">
@@ -91,7 +91,7 @@
             android:enabled="true"
             android:foreground="@drawable/ic_touch_fg"
             android:padding="@dimen/len_8"
-            android:src="@drawable/ic_emoji"
+            app:srcCompat="@drawable/ic_emoji"
             android:tint="@color/textPrimary" />
 
         <ImageView
@@ -102,7 +102,7 @@
             android:enabled="true"
             android:foreground="@drawable/ic_touch_fg"
             android:padding="@dimen/len_8"
-            android:src="@drawable/ic_record"
+            app:srcCompat="@drawable/ic_record"
             android:tint="@color/textPrimary" />
 
         <EditText

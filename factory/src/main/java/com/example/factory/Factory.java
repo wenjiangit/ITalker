@@ -133,7 +133,7 @@ public class Factory {
                 break;
             case RspModel.ERROR_ACCOUNT_TOKEN:
                 Application.showToast(R.string.data_rsp_error_account_token);
-                instance.logout();
+                logout();
                 break;
             case RspModel.ERROR_ACCOUNT_LOGIN:
                 decodeRspCode(R.string.data_rsp_error_account_login, callback);
@@ -152,6 +152,7 @@ public class Factory {
     }
 
     public static void logout() {
+        //清除数据库和缓存信息
         FlowManager.destroy();
         SharedPreferences preferences = app().getSharedPreferences(Account.class.getName(), Context.MODE_PRIVATE);
         preferences.edit().clear().apply();

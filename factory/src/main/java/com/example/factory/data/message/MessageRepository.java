@@ -1,14 +1,15 @@
 package com.example.factory.data.message;
 
-import android.transition.Slide;
+import android.support.annotation.NonNull;
 
-import com.example.commom.factory.data.DataSource;
 import com.example.factory.data.BaseDbRepository;
 import com.example.factory.model.db.Message;
 import com.example.factory.model.db.Message_Table;
 import com.raizlabs.android.dbflow.sql.language.OperatorGroup;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
+import com.raizlabs.android.dbflow.structure.database.transaction.QueryTransaction;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -37,7 +38,7 @@ public class MessageRepository extends BaseDbRepository<Message>
                         .and(Message_Table.sender_id.eq(mReceiverId)))
                 .or(Message_Table.receiver_id.eq(mReceiverId))
                 .limit(30)
-                .orderBy(Message_Table.createAt,false)
+                .orderBy(Message_Table.createAt,false)//拉取最新的30条数据,所以要时间逆序
                 .async()
                 .queryListResultCallback(this)
                 .execute();
@@ -49,5 +50,14 @@ public class MessageRepository extends BaseDbRepository<Message>
                 && message.getGroup() == null)
                 || (message.getReceiver() != null
                 && mReceiverId.equalsIgnoreCase(message.getReceiver().getId()));
+    }
+
+
+    @Override
+    public void onListQueryResult(QueryTransaction transaction, @NonNull List<Message> tResult) {
+        //然后再将获取到的数据反向
+        Collections.reverse(tResult);
+        super.onListQueryResult(transaction, tResult);
+
     }
 }

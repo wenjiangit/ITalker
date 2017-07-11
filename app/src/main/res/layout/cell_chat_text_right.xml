@@ -17,9 +17,10 @@
         android:layout_height="wrap_content"
         android:minHeight="@dimen/portraitSize"
         android:paddingStart="@dimen/len_16"
+        android:paddingEnd="@dimen/len_16"
         android:layout_gravity="end"
         android:layout_marginEnd="@dimen/len_20"
-        android:background="@drawable/cell_chat_bg"
+        android:background="@drawable/cell_chat_bg_green"
         >
 
         <TextView
@@ -27,13 +28,12 @@
             android:layout_gravity="center_vertical|end"
             android:id="@+id/txt_content"
             tools:text="@string/app_name"
-            android:layout_marginEnd="@dimen/len_24"
+            android:layout_marginEnd="@dimen/len_12"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
     </FrameLayout>
-
 
     <com.example.commom.widget.PortraitView
         android:layout_gravity="end"

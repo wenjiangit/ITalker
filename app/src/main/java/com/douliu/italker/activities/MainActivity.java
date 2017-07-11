@@ -26,7 +26,6 @@ import com.douliu.italker.frags.mian.GroupFragment;
 import com.example.commom.app.BaseActivity;
 import com.example.commom.helper.NavHelper;
 import com.example.commom.widget.PortraitView;
-import com.example.factory.Factory;
 import com.example.factory.persistant.Account;
 
 import net.qiujuer.genius.ui.Ui;
@@ -113,20 +112,26 @@ public class MainActivity extends BaseActivity implements
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.im_search:
-                NavHelper.Tab<Integer> currentTab = mNavHelper.getCurrent();
-                if (Objects.equals(currentTab.extra, R.string.action_group)) {
-                    SearchActivity.show(this, SearchActivity.TYPE_GROUP);
-                } else {
-                    SearchActivity.show(this, SearchActivity.TYPE_USER);
-                }
+                goSearch();
                 break;
             case R.id.btn_action:
-                AccountActivity.show(this);
-                Factory.logout();
+                goSearch();
                 break;
             case R.id.im_portrait:
                 PersonalActivity.show(this,Account.getUserId());
                 break;
+        }
+    }
+
+    /**
+     * 根据当前是群的界面还是其他界面跳转到群或者人搜索界面
+     */
+    private void goSearch() {
+        NavHelper.Tab<Integer> currentTab = mNavHelper.getCurrent();
+        if (Objects.equals(currentTab.extra, R.string.action_group)) {
+            SearchActivity.show(this, SearchActivity.TYPE_GROUP);
+        } else {
+            SearchActivity.show(this, SearchActivity.TYPE_USER);
         }
     }
 

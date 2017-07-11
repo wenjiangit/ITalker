@@ -15,8 +15,10 @@ import android.view.ViewGroup;
 
 import com.douliu.italker.App;
 import com.douliu.italker.R;
+import com.douliu.italker.activities.AccountActivity;
 import com.douliu.italker.activities.MainActivity;
 import com.douliu.italker.frags.media.GalleryFragment;
+import com.example.factory.persistant.Account;
 
 import java.util.List;
 
@@ -193,6 +195,11 @@ public class PermissionsFragment extends BottomSheetDialogFragment
         App.showToast(R.string.label_permission_ok);
         refreshState(getView());
 //        dismiss();
+        if (Account.isLogin()) {
+            MainActivity.show(getActivity());
+        } else {
+            AccountActivity.show(getActivity());
+        }
     }
 
     @Override

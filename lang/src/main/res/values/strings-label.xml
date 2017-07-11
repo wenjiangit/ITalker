@@ -46,4 +46,5 @@
     <string name="toast_audio_record_time_short_error">录音时间太短!</string>
 
     <string name="toast_download_error">下载失败!</string>
+    <string name="label_login_out">退出登录</string>
 </resources>

@@ -39,14 +39,14 @@ public class SessionRepository extends BaseDbRepository<Session>
     @Override
     protected void insert(Session session) {
         //添加数据到第一个
-        mDataList.add(0, session);
+        mDataList.addFirst(session);
     }
 
     @Override
     public void onListQueryResult(QueryTransaction transaction, @NonNull List<Session> tResult) {
 
         //反转
-        Collections.reverse(mDataList);
+//        Collections.reverse(mDataList);
         super.onListQueryResult(transaction, tResult);
 
     }

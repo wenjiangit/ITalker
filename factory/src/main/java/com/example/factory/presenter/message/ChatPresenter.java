@@ -20,10 +20,10 @@ import java.util.List;
 public class ChatPresenter<Model> extends BaseSourcePresenter<Message, Message,MessageDataSource, ChatContract.View<Model>>
         implements ChatContract.Presenter {
 
-    protected String mReceiverId;
-    protected int mReceiverType;
+    String mReceiverId;
+    private int mReceiverType;
 
-    public ChatPresenter(MessageDataSource source, ChatContract.View<Model> view,
+    ChatPresenter(MessageDataSource source, ChatContract.View<Model> view,
                          String receiverId,int receiverType) {
         super(source, view);
         this.mReceiverId = receiverId;

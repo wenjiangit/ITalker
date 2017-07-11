@@ -19,6 +19,7 @@
         android:layout_gravity="start"
         android:layout_marginStart="@dimen/len_20"
         android:paddingEnd="@dimen/len_16"
+        android:paddingStart="@dimen/len_16"
         android:background="@drawable/cell_chat_bg"
         >
 
@@ -27,7 +28,7 @@
             android:layout_gravity="center_vertical|start"
             android:id="@+id/txt_content"
             tools:text="@string/app_name"
-            android:layout_marginStart="@dimen/len_24"
+            android:layout_marginStart="@dimen/len_12"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

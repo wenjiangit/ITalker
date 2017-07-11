@@ -28,7 +28,7 @@ public abstract class BaseDbRepository<Data extends BaseDbModel<Data>>
     private SucceedCallback<List<Data>> mCallback;
 
     //数据库数据缓存
-    protected final List<Data> mDataList = new LinkedList<>();
+    protected final LinkedList<Data> mDataList = new LinkedList<>();
 
     //数据类型,即对应的class对象
     private Class<Data> mDataClass;

@@ -19,6 +19,7 @@ import com.douliu.italker.R;
 import com.example.commom.app.PresenterToolbarActivity;
 import com.example.commom.widget.PortraitView;
 import com.example.factory.model.db.User;
+import com.example.factory.persistant.Account;
 import com.example.factory.presenter.user.PersonalContract;
 import com.example.factory.presenter.user.PersonalPresenter;
 
@@ -27,6 +28,9 @@ import net.qiujuer.genius.ui.widget.Button;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * 个人中心页面
+ */
 public class PersonalActivity extends PresenterToolbarActivity<PersonalContract.Presenter>
         implements PersonalContract.View {
 
@@ -96,6 +100,13 @@ public class PersonalActivity extends PresenterToolbarActivity<PersonalContract.
         }
     }
 
+    @OnClick(R.id.im_portrait)
+    void onPortraitClick() {
+        if (userId.equalsIgnoreCase(Account.getUserId())) {
+            SettingsActivity.show(this);
+        }
+    }
+
     private void followUser() {
         // TODO: 2017/6/24 发起关注
 
@@ -134,13 +145,6 @@ public class PersonalActivity extends PresenterToolbarActivity<PersonalContract.
         mTxtName.setText(user.getName());
         mTxtFollowing.setText(String.format(getString(R.string.label_following), user.getFollowing()));
         mTxtFollows.setText(String.format(getString(R.string.label_follows), user.getFollows()));
-
-       /* Glide.with(this)
-                .load(user.getPortrait())
-                .apply(RequestOptions.fitCenterTransform())
-                .apply(RequestOptions.placeholderOf(R.drawable.default_portrait))
-                .apply(RequestOptions.noAnimation())
-                .into(mImHeader);*/
     }
 
     @Override
