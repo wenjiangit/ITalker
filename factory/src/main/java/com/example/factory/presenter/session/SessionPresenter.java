@@ -7,8 +7,6 @@ import com.example.commom.widget.recycler.RecyclerAdapter;
 import com.example.factory.data.message.SessionDataSource;
 import com.example.factory.data.message.SessionRepository;
 import com.example.factory.model.db.Session;
-import com.example.factory.model.db.User;
-import com.example.factory.presenter.search.ContactContract;
 import com.example.factory.utils.DiffUiDataCallback;
 
 import java.util.List;

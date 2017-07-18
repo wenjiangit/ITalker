@@ -19,9 +19,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.douliu.italker.R;
 import com.douliu.italker.activities.MessageActivity;
-import com.example.commom.app.BaseFragment;
 import com.example.commom.app.PresenterFragment;
-import com.example.commom.factory.presenter.BaseContract;
 import com.example.commom.widget.PortraitView;
 import com.example.commom.widget.TextWatcherAdapter;
 import com.example.commom.widget.recycler.RecyclerAdapter;
@@ -95,6 +93,10 @@ public abstract class ChatFragment<InitModel> extends PresenterFragment<ChatCont
         });
     }
 
+    @Override
+    public RecyclerView getRecyclerView() {
+        return mRecyclerView;
+    }
 
     private void initAppbar() {
         mAppbar.addOnOffsetChangedListener(this);

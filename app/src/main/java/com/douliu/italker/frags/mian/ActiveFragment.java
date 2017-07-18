@@ -1,10 +1,10 @@
 package com.douliu.italker.frags.mian;
 
 
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.TextView;
 
@@ -47,6 +47,7 @@ public class ActiveFragment extends PresenterFragment<SessionContract.Presenter>
     protected void initWidget(View rootView) {
         super.initWidget(rootView);
         mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecycler.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         mRecycler.setAdapter(mAdapter = new RecyclerAdapter<Session>() {
             @Override
             protected int getItemViewType(int position, Session session) {

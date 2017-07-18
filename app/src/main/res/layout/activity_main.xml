@@ -49,7 +49,7 @@
                 android:foreground="@drawable/ic_touch_menu"
                 android:padding="@dimen/len_10"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_search" />
+                app:srcCompat="@drawable/ic_search" />
 
 
         </FrameLayout>
@@ -74,7 +74,7 @@
         android:layout_marginBottom="@dimen/len_68"
         android:layout_marginEnd="@dimen/len_12"
         android:padding="@dimen/len_20"
-        android:src="@drawable/ic_group_add"
+        app:srcCompat="@drawable/ic_group_add"
         android:tint="?attr/toolbarMenuIconColor"
         tools:visibility="visible"
         app:gBackgroundColor="@color/colorAccent"

@@ -8,7 +8,6 @@ import com.example.factory.model.db.Session_Table;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.database.transaction.QueryTransaction;
 
-import java.util.Collections;
 import java.util.List;
 
 /**

@@ -5,7 +5,6 @@ import com.example.factory.data.message.MessageRepository;
 import com.example.factory.model.db.Message;
 import com.example.factory.model.db.User;
 
-import java.util.Collections;
 import java.util.List;
 
 /**

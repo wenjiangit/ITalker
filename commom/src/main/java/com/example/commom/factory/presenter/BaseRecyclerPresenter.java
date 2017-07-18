@@ -65,5 +65,14 @@ public class BaseRecyclerPresenter<Model,View extends BaseContract.RecyclerView>
         view.onAdapterDataChanged();
         //通知增量更新
         diffResult.dispatchUpdatesTo(adapter);
+
+        //数据有增加
+        onSurfaceChange(dataList);
     }
+
+    public void onSurfaceChange(List<Model> dataList) {
+
+    }
+
+
 }

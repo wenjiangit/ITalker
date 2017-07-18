@@ -174,7 +174,8 @@ public abstract class RecyclerAdapter<Data> extends RecyclerView.Adapter<Recycle
      * 插入一组数据,并通知更新
      * @param dataList
      */
-    public void add(Data... dataList) {
+    @SafeVarargs
+    public final void add(Data... dataList) {
         if (dataList != null && dataList.length > 0) {
             Collections.addAll(mDataList, dataList);
             int startPos = mDataList.size() - 1;

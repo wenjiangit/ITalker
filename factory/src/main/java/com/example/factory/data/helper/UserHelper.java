@@ -13,6 +13,7 @@ import com.example.factory.model.db.User;
 import com.example.factory.model.db.User_Table;
 import com.example.factory.net.Network;
 import com.example.factory.net.RemoteService;
+import com.example.factory.persistant.Account;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.List;
@@ -180,6 +181,21 @@ public class UserHelper {
             user = findFromLocal(userId);
         }
         return user;
+    }
+
+    /**
+     * 从本地数据库查询我的联系人列表
+     * @return List<User>
+     */
+    public static List<User> contacts() {
+        //查询本地数据库我的联系人列表
+        return SQLite.select()
+                .from(User.class)
+                .where(User_Table.isFollow.eq(true))
+                .and(User_Table.id.notEq(Account.getUserId()))
+                .orderBy(User_Table.name, true)
+                .limit(100)
+                .queryList();
     }
 
 

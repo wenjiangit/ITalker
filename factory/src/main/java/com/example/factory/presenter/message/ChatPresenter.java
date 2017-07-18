@@ -3,6 +3,7 @@ package com.example.factory.presenter.message;
 import android.support.v7.util.DiffUtil;
 
 import com.example.commom.factory.presenter.BaseSourcePresenter;
+import com.example.commom.widget.recycler.RecyclerAdapter;
 import com.example.factory.data.helper.MessageHelper;
 import com.example.factory.data.message.MessageDataSource;
 import com.example.factory.model.api.MessageCreateModel;
@@ -48,6 +49,15 @@ public class ChatPresenter<Model> extends BaseSourcePresenter<Message, Message,M
         DiffUtil.DiffResult result = DiffUtil.calculateDiff(callback);
         refreshData(result, messages);
 
+    }
+
+    @Override
+    public void onSurfaceChange(List<Message> dataList) {
+        super.onSurfaceChange(dataList);
+        ChatContract.View<Model> view = getView();
+        if (view == null) return;
+        RecyclerAdapter<Message> adapter = view.getRecyclerAdapter();
+        view.getRecyclerView().scrollToPosition(adapter.getItemCount() - 1);
     }
 
     @Override

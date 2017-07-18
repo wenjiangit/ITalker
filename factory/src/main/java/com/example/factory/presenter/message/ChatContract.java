@@ -1,5 +1,7 @@
 package com.example.factory.presenter.message;
 
+import android.support.v7.widget.RecyclerView;
+
 import com.example.commom.factory.presenter.BaseContract;
 import com.example.factory.model.db.Group;
 import com.example.factory.model.db.Message;
@@ -28,6 +30,8 @@ public interface ChatContract {
     interface View<InitModel> extends BaseContract.RecyclerView<Presenter, Message> {
 
         void onInit(InitModel model);
+
+        RecyclerView getRecyclerView();
     }
 
 

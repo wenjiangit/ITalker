@@ -1,6 +1,5 @@
 package com.example.factory.model.api;
 
-import com.example.factory.data.message.MessageRepository;
 import com.example.factory.model.card.MessageCard;
 import com.example.factory.model.db.Message;
 import com.example.factory.persistant.Account;

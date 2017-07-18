@@ -4,7 +4,6 @@ import com.example.factory.Factory;
 import com.example.factory.model.api.MessageCreateModel;
 import com.example.factory.model.api.RspModel;
 import com.example.factory.model.card.MessageCard;
-import com.example.factory.model.db.Group;
 import com.example.factory.model.db.Message;
 import com.example.factory.model.db.Message_Table;
 import com.example.factory.net.Network;

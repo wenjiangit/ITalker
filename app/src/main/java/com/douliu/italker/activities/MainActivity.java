@@ -115,7 +115,12 @@ public class MainActivity extends BaseActivity implements
                 goSearch();
                 break;
             case R.id.btn_action:
-                goSearch();
+                NavHelper.Tab<Integer> currentTab = mNavHelper.getCurrent();
+                if (Objects.equals(currentTab.extra, R.string.title_group)) {
+                    GroupCreateActivity.show(this);
+                } else {
+                    SearchActivity.show(this, SearchActivity.TYPE_USER);
+                }
                 break;
             case R.id.im_portrait:
                 PersonalActivity.show(this,Account.getUserId());
@@ -128,7 +133,7 @@ public class MainActivity extends BaseActivity implements
      */
     private void goSearch() {
         NavHelper.Tab<Integer> currentTab = mNavHelper.getCurrent();
-        if (Objects.equals(currentTab.extra, R.string.action_group)) {
+        if (Objects.equals(currentTab.extra, R.string.title_group)) {
             SearchActivity.show(this, SearchActivity.TYPE_GROUP);
         } else {
             SearchActivity.show(this, SearchActivity.TYPE_USER);
@@ -164,12 +169,6 @@ public class MainActivity extends BaseActivity implements
                 .setInterpolator(new AnticipateOvershootInterpolator(1))
                 .setDuration(480)
                 .start();
-
-
     }
 
-    @Override
-    public void onContentChanged() {
-        super.onContentChanged();
-    }
 }

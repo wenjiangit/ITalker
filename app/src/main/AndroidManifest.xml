@@ -83,9 +83,13 @@
             android:label="@string/action_person"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.TransStatusBar" />
-        <activity android:name=".activities.SettingsActivity"
+        <activity
+            android:name=".activities.SettingsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.TransStatusBar"
+            android:theme="@style/AppTheme.TransStatusBar" />
+        <activity android:name=".activities.GroupCreateActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Create_Group"
             />
     </application>
 

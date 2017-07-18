@@ -2,13 +2,14 @@ package com.example.factory.net;
 
 import com.example.commom.net.model.RegisterModel;
 import com.example.factory.model.api.AccountRspModel;
+import com.example.factory.model.api.GroupCreateModel;
 import com.example.factory.model.api.LoginModel;
 import com.example.factory.model.api.MessageCreateModel;
 import com.example.factory.model.api.RspModel;
 import com.example.factory.model.api.UpdateInfoModel;
+import com.example.factory.model.card.GroupCard;
 import com.example.factory.model.card.MessageCard;
 import com.example.factory.model.card.UserCard;
-import com.example.factory.model.db.Message;
 
 import java.util.List;
 
@@ -53,6 +54,9 @@ public interface RemoteService {
 
     @POST("msg")
     Call<RspModel<MessageCard>> msgPush(@Body MessageCreateModel model);
+
+    @POST("group")
+    Call<RspModel<GroupCard>> groupCreate(@Body GroupCreateModel model);
 
 
 

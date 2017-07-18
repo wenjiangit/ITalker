@@ -3,7 +3,6 @@ package com.example.factory;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.nfc.Tag;
 import android.support.annotation.StringRes;
 import android.util.Log;
 
@@ -21,9 +20,6 @@ import com.example.factory.model.card.GroupCard;
 import com.example.factory.model.card.GroupMemberCard;
 import com.example.factory.model.card.MessageCard;
 import com.example.factory.model.card.UserCard;
-import com.example.factory.model.db.Group;
-import com.example.factory.model.db.GroupMember;
-import com.example.factory.model.db.Message;
 import com.example.factory.persistant.Account;
 import com.example.factory.utils.DbflowExclusionStrategy;
 import com.google.gson.Gson;
