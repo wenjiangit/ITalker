@@ -13,9 +13,14 @@ import com.example.factory.presenter.message.ChatContract;
 public class GroupChatFragment extends ChatFragment<Group>
         implements ChatContract.GroupView {
 
-
     public GroupChatFragment() {
         // Required empty public constructor
+    }
+
+
+    @Override
+    protected void initData() {
+//        super.initData();
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.example.factory.data.helper;
 
+import android.util.Log;
+
 import com.example.commom.factory.data.DataSource;
 import com.example.factory.Factory;
 import com.example.factory.R;
@@ -11,6 +13,8 @@ import com.example.factory.model.db.Group_Table;
 import com.example.factory.net.Network;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,6 +25,8 @@ import retrofit2.Response;
  */
 
 public class GroupHelper {
+
+    private static final String TAG = "GroupHelper";
     /**
      * 从本地查找群
      * @param id 群id
@@ -50,9 +56,11 @@ public class GroupHelper {
             @Override
             public void onResponse(Call<RspModel<GroupCard>> call, Response<RspModel<GroupCard>> response) {
                 RspModel<GroupCard> rspModel = response.body();
+                Log.i(TAG, "create: " + rspModel);
                 if (rspModel != null && rspModel.success()) {
                     GroupCard groupCard = rspModel.getResult();
                     Factory.getGroupCenter().dispatch(groupCard);
+                    callback.onDataLoaded(groupCard);
                 } else {
                     Factory.decodeRspCode(rspModel,callback);
                 }
@@ -65,4 +73,34 @@ public class GroupHelper {
             }
         });
     }
+
+    /**
+     * 搜索群，通过日期,获取相应日期以后有过变更的群
+     *
+     * @param dateStr 日期字符串{@link System#currentTimeMillis()}
+     */
+    public static void list(String dateStr) {
+        Call<RspModel<List<GroupCard>>> call = Network.remote().groupList(dateStr);
+        call.enqueue(new Callback<RspModel<List<GroupCard>>>() {
+            @Override
+            public void onResponse(Call<RspModel<List<GroupCard>>> call,
+                                   Response<RspModel<List<GroupCard>>> response) {
+                RspModel<List<GroupCard>> rspModel = response.body();
+                Log.i(TAG, "list: " + rspModel);
+                if (rspModel != null && rspModel.success()) {
+                    List<GroupCard> groupCards = rspModel.getResult();
+                    Factory.getGroupCenter().dispatch(groupCards.toArray(new GroupCard[0]));
+                } else {
+                    Factory.decodeRspCode(rspModel, null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RspModel<List<GroupCard>>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+
 }

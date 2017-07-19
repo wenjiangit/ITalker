@@ -12,7 +12,14 @@ public class GroupCreateModel {
     private String name;
     private String desc;
     private String picture;
-    private Set<String> memberIds = new HashSet<>();
+    private Set<String> members = new HashSet<>();
+
+    public GroupCreateModel(String name, String desc, String picture, Set<String> memberIds) {
+        this.name = name;
+        this.desc = desc;
+        this.picture = picture;
+        this.members = memberIds;
+    }
 
     public String getName() {
         return name;
@@ -39,10 +46,10 @@ public class GroupCreateModel {
     }
 
     public Set<String> getMemberIds() {
-        return memberIds;
+        return members;
     }
 
     public void setMemberIds(Set<String> memberIds) {
-        this.memberIds = memberIds;
+        this.members = memberIds;
     }
 }

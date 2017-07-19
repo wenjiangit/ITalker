@@ -108,4 +108,18 @@ public class GroupCard {
         group.setOwner(owner);
         return group;
     }
+
+    @Override
+    public String toString() {
+        return "GroupCard{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", desc='" + desc + '\'' +
+                ", picture='" + picture + '\'' +
+                ", ownerId='" + ownerId + '\'' +
+                ", notifyLevel=" + notifyLevel +
+                ", joinAt=" + joinAt +
+                ", modifyAt=" + modifyAt +
+                '}';
+    }
 }

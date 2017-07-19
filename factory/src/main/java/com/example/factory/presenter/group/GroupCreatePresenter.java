@@ -3,14 +3,20 @@ package com.example.factory.presenter.group;
 import android.text.TextUtils;
 
 import com.example.commom.app.Application;
+import com.example.commom.factory.data.DataSource;
 import com.example.commom.factory.presenter.BaseRecyclerPresenter;
 import com.example.factory.Factory;
 import com.example.factory.R;
+import com.example.factory.data.helper.GroupHelper;
 import com.example.factory.data.helper.UserHelper;
 import com.example.factory.model.api.GroupCreateModel;
+import com.example.factory.model.card.GroupCard;
 import com.example.factory.model.db.User;
 import com.example.factory.net.UploadHelper;
 import com.example.factory.presenter.group.GroupCreateContract.Presenter;
+
+import net.qiujuer.genius.kit.handler.Run;
+import net.qiujuer.genius.kit.handler.runable.Action;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,7 +29,7 @@ import java.util.Set;
  */
 
 public class GroupCreatePresenter extends BaseRecyclerPresenter<GroupCreateContract.ViewModel,
-        GroupCreateContract.View> implements Presenter {
+        GroupCreateContract.View> implements Presenter, DataSource.Callback<GroupCard> {
 
     public GroupCreatePresenter(GroupCreateContract.View view) {
         super(view);
@@ -49,18 +55,19 @@ public class GroupCreatePresenter extends BaseRecyclerPresenter<GroupCreateContr
                 public void run() {
                     String url = UploadHelper.uploadPortrait(picture);
                     if (!TextUtils.isEmpty(url)) {
-                        GroupCreateModel model = new GroupCreateModel();
-                        model.setDesc(desc);
-                        model.setName(name);
-                        model.setPicture(url);
-                        model.setMemberIds(mMemberIds);
-//                        GroupHelper.create(model,this);
+                        GroupCreateModel model = new GroupCreateModel(name, desc, url, mMemberIds);
+                        GroupHelper.create(model,GroupCreatePresenter.this);
+                    } else {
+                        Run.onUiAsync(new Action() {
+                            @Override
+                            public void call() {
+                                Application.showToast(R.string.data_rsp_error_unknown);
+                            }
+                        });
                     }
                 }
             });
-
         }
-
     }
 
     @Override
@@ -87,10 +94,38 @@ public class GroupCreatePresenter extends BaseRecyclerPresenter<GroupCreateContr
                 model.isSelected = false;
                 modelList.add(model);
             }
-
             refreshData(modelList);
         }
     };
 
 
+    @Override
+    public void onDataLoaded(GroupCard response) {
+        final GroupCreateContract.View view = getView();
+        if (view == null) return;
+        Run.onUiAsync(new Action() {
+            @Override
+            public void call() {
+                view.onCreateSucceed();
+            }
+        });
+    }
+
+    @Override
+    public void onDataNotAvailable(final int strRes) {
+        final GroupCreateContract.View view = getView();
+        if (view == null) return;
+        Run.onUiAsync(new Action() {
+            @Override
+            public void call() {
+                view.showError(strRes);
+            }
+        });
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        mMemberIds.clear();
+    }
 }

@@ -58,6 +58,10 @@ public interface RemoteService {
     @POST("group")
     Call<RspModel<GroupCard>> groupCreate(@Body GroupCreateModel model);
 
+    @GET("group/list/{date}")
+    Call<RspModel<List<GroupCard>>> groupList(@Path("date") String dateStr);
+
+
 
 
 

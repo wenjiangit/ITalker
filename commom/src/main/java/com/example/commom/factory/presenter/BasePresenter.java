@@ -53,4 +53,6 @@ public abstract class BasePresenter<T extends BaseContract.View>
             view.setPresenter(null);
         }
     }
+
+
 }

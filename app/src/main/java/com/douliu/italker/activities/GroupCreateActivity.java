@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -132,6 +133,7 @@ public class GroupCreateActivity extends PresenterToolbarActivity<GroupCreateCon
         String name = mEditName.getText().toString().trim();
         String desc = mEditDesc.getText().toString().trim();
         mPresenter.create(name, desc, mPortraitFilePath);
+        hideSoftKeyBoard();
     }
 
     @Override
@@ -160,7 +162,19 @@ public class GroupCreateActivity extends PresenterToolbarActivity<GroupCreateCon
 
     @Override
     public void onCreateSucceed() {
+        App.showToast(R.string.label_group_create_succeed);
+        finish();
+    }
 
+    /**
+     * 隐藏软键盘
+     */
+    private void hideSoftKeyBoard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        View focus = getCurrentFocus();
+        if (focus != null) {
+            imm.hideSoftInputFromWindow(focus.getWindowToken(), 0);
+        }
     }
 
     @Override
@@ -208,7 +222,7 @@ public class GroupCreateActivity extends PresenterToolbarActivity<GroupCreateCon
         @Override
         public void onBind(GroupCreateContract.ViewModel model) {
             mTxtName.setText(model.author.getName());
-            mCbSelect.setSelected(model.isSelected);
+            mCbSelect.setChecked(model.isSelected);
             mPortraitView.setup(Glide.with(GroupCreateActivity.this), model.author.getPortrait());
         }
     }

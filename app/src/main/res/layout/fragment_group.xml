@@ -4,12 +4,19 @@
     android:layout_height="match_parent"
     tools:context="com.douliu.italker.frags.mian.GroupFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:textColor="@color/red_500"
+    <android.support.v7.widget.RecyclerView
+        android:id="@id/recycler"
+        android:paddingTop="@dimen/len_8"
+        android:paddingBottom="@dimen/len_8"
+        android:clipToPadding="false"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Group" />
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <com.example.commom.widget.EmptyView
+        android:id="@+id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </FrameLayout>
