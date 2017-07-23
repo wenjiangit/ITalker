@@ -45,6 +45,7 @@ public class GroupCreatePresenter extends BaseRecyclerPresenter<GroupCreateContr
 
     @Override
     public void create(final String name, final String desc, final String picture) {
+        super.start();
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(desc)
                 || mMemberIds.size() == 0
                 || TextUtils.isEmpty(picture)) {

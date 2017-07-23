@@ -162,6 +162,7 @@ public class GroupCreateActivity extends PresenterToolbarActivity<GroupCreateCon
 
     @Override
     public void onCreateSucceed() {
+        hideLoading();
         App.showToast(R.string.label_group_create_succeed);
         finish();
     }
@@ -170,11 +171,12 @@ public class GroupCreateActivity extends PresenterToolbarActivity<GroupCreateCon
      * 隐藏软键盘
      */
     private void hideSoftKeyBoard() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         View focus = getCurrentFocus();
-        if (focus != null) {
-            imm.hideSoftInputFromWindow(focus.getWindowToken(), 0);
+        if (focus == null) {
+            return;
         }
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(focus.getWindowToken(), 0);
     }
 
     @Override
@@ -189,7 +191,7 @@ public class GroupCreateActivity extends PresenterToolbarActivity<GroupCreateCon
 
     @Override
     public void onAdapterDataChanged() {
-
+        hideLoading();
     }
 
     class Adapter extends RecyclerAdapter<GroupCreateContract.ViewModel>{

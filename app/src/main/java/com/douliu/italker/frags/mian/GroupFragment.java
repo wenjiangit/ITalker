@@ -116,6 +116,11 @@ public class GroupFragment extends PresenterFragment<GroupContract.Presenter>
             mImPortrait.setup(Glide.with(GroupFragment.this), group.getPicture());
             mTxtName.setText(group.getName());
             mTxtDesc.setText(group.getDesc());
+            if (group.holder != null && group.holder instanceof String) {
+                mTxtMember.setText((String) group.holder);
+            } else {
+                mTxtMember.setText("");
+            }
         }
     }
 

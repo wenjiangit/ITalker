@@ -2,12 +2,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.douliu.italker.frags.search.GroupSearchFragment">
+    tools:context="com.douliu.italker.frags.search.UserSearchFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/white_alpha_240"
+        android:paddingTop="@dimen/len_2"
+        android:paddingBottom="@dimen/len_2"
+        android:clipToPadding="false"
+        android:visibility="gone"
+        />
+
+    <com.example.commom.widget.EmptyView
+        android:id="@+id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
 </FrameLayout>
+

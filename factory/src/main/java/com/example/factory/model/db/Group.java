@@ -1,5 +1,7 @@
 package com.example.factory.model.db;
 
+import com.example.factory.data.helper.GroupHelper;
+import com.example.factory.model.sample.MemberUserModel;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
@@ -8,6 +10,7 @@ import com.raizlabs.android.dbflow.annotation.Table;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -18,7 +21,7 @@ import java.util.Objects;
  * @version 1.0.0
  */
 @Table(database = AppDatabase.class)
-public class Group extends BaseDbModel<Group> implements Serializable{
+public class Group extends BaseDbModel<Group> implements Serializable {
     @PrimaryKey
     private String id; // 群Id
     @Column
@@ -39,6 +42,8 @@ public class Group extends BaseDbModel<Group> implements Serializable{
 
 
     public Object holder; // 预留字段，用于界面显示
+
+
 
     public String getId() {
         return id;
@@ -141,5 +146,33 @@ public class Group extends BaseDbModel<Group> implements Serializable{
                 && Objects.equals(this.desc, oldT.desc)
                 && Objects.equals(this.picture, oldT.picture)
                 && Objects.equals(this.holder, oldT.holder);
+    }
+
+    private long mGroupMemberCount = -1;
+
+    /**
+     * 获取群成员的个数，并缓存起来
+     *
+     * @return 群个数
+     */
+    public long getGroupMemberCount() {
+        if (mGroupMemberCount == -1) {
+            mGroupMemberCount = GroupHelper.getGroupMemberCount(id);
+        }
+        return mGroupMemberCount;
+    }
+
+    //简单的用于界面显示的数据
+    private List<MemberUserModel> mLatelySampleData;
+    /**
+     * 获取懒加载数据
+     *
+     * @return List<MemberUserModel>
+     */
+    public List<MemberUserModel> getLatelySampleData() {
+        if (mLatelySampleData == null) {
+            mLatelySampleData = GroupHelper.getLatelySampleData(id, 4);
+        }
+        return mLatelySampleData;
     }
 }

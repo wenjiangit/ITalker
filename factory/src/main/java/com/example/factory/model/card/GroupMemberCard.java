@@ -90,4 +90,17 @@ public class GroupMemberCard {
         member.setUser(user);
         return member;
     }
+
+    @Override
+    public String toString() {
+        return "GroupMemberCard{" +
+                "id='" + id + '\'' +
+                ", alias='" + alias + '\'' +
+                ", isAdmin=" + isAdmin +
+                ", isOwner=" + isOwner +
+                ", userId='" + userId + '\'' +
+                ", groupId='" + groupId + '\'' +
+                ", modifyAt=" + modifyAt +
+                '}';
+    }
 }

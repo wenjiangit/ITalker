@@ -60,7 +60,6 @@ public class UserSearchFragment extends PresenterFragment<SearchContract.Present
         super.initWidget(rootView);
 
         mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecycler.addItemDecoration(new DefaultItemDecoration(getContext()));
         mRecycler.setAdapter(mAdapter = new RecyclerAdapter<UserCard>() {
             @Override
             protected int getItemViewType(int position, UserCard userCard) {
