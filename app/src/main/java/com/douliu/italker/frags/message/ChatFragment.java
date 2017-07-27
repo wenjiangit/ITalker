@@ -2,6 +2,7 @@ package com.douliu.italker.frags.message;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -64,6 +66,12 @@ public abstract class ChatFragment<InitModel> extends PresenterFragment<ChatCont
         mReceiverId = arguments.getString(MessageActivity.EXTRA_RECEIVER_ID);
     }
 
+    //用final修饰方法,子类无法继承
+    @Override
+    protected final int getContentLayoutId() {
+        return R.layout.fragment_chat_common;
+    }
+
     @Override
     protected void initData() {
         super.initData();
@@ -72,6 +80,11 @@ public abstract class ChatFragment<InitModel> extends PresenterFragment<ChatCont
 
     @Override
     protected void initWidget(View rootView) {
+        ViewStub viewStub = (ViewStub) rootView.findViewById(R.id.view_stub_header);
+        viewStub.setLayoutResource(getLayoutHeaderId());
+        viewStub.inflate();
+        //加载头布局必须在butterknife绑定控件之前
+        //不然会出现找不到资源的异常
         super.initWidget(rootView);
 
         initToolbar();
@@ -163,6 +176,9 @@ public abstract class ChatFragment<InitModel> extends PresenterFragment<ChatCont
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
     }
 
+    //返回头部资源id
+    @LayoutRes
+    public abstract int getLayoutHeaderId();
 
     private class ChatAdapter extends RecyclerAdapter<Message> {
         @Override

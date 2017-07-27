@@ -25,20 +25,16 @@ import java.util.concurrent.Executors;
 
 public class MessageDispatcher implements MessageCenter {
 
-    private static MessageDispatcher instance;
-
     //维护一个单线程池进行统一的线程调度
     private static final Executor executor = Executors.newSingleThreadExecutor();
 
     public static MessageDispatcher instance() {
-        if (instance == null) {
-            synchronized (MessageDispatcher.class) {
-                if (instance == null) {
-                    instance = new MessageDispatcher();
-                }
-            }
-        }
-        return instance;
+        return InstanceHolder.instance;
+    }
+
+    //静态内部类实现单例
+    private static class InstanceHolder{
+        private static MessageDispatcher instance = new MessageDispatcher();
     }
 
     private MessageDispatcher() {

@@ -18,14 +18,15 @@ import java.util.List;
  * Created by wenjian on 2017/7/8.
  */
 
-public class ChatPresenter<Model> extends BaseSourcePresenter<Message, Message,MessageDataSource, ChatContract.View<Model>>
+public class ChatPresenter<Model, View extends ChatContract.View<Model>> extends BaseSourcePresenter
+        <Message, Message, MessageDataSource, View>
         implements ChatContract.Presenter {
 
     String mReceiverId;
     private int mReceiverType;
 
-    ChatPresenter(MessageDataSource source, ChatContract.View<Model> view,
-                         String receiverId,int receiverType) {
+    ChatPresenter(MessageDataSource source, View view,
+                  String receiverId, int receiverType) {
         super(source, view);
         this.mReceiverId = receiverId;
         this.mReceiverType = receiverType;

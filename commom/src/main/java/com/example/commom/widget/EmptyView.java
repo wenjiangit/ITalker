@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.commom.R;
-import com.example.commom.app.Application;
 import com.example.commom.widget.invention.PlaceHolderView;
 
 import net.qiujuer.genius.ui.widget.Loading;
@@ -125,7 +124,11 @@ public class EmptyView extends LinearLayout implements PlaceHolderView {
      */
     @Override
     public void triggerError(@StringRes int strRes) {
-        Application.showToast(strRes);
+        mLoading.setVisibility(GONE);
+        mLoading.stop();
+        mEmptyImg.setImageResource(mDrawableIds[1]);
+        mStatusText.setText(strRes);
+        mEmptyImg.setVisibility(VISIBLE);
         setVisibility(VISIBLE);
         changeBindViewVisibility(GONE);
     }

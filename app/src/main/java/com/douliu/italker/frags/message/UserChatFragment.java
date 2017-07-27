@@ -40,12 +40,6 @@ public class UserChatFragment extends ChatFragment<User>
         // Required empty public constructor
     }
 
-
-    @Override
-    protected int getContentLayoutId() {
-        return R.layout.fragment_user_chat;
-    }
-
     @Override
     protected void initToolbar() {
         super.initToolbar();
@@ -112,6 +106,11 @@ public class UserChatFragment extends ChatFragment<User>
                 mPersonMenuItem.setVisible(true);
             }
         }
+    }
+
+    @Override
+    public int getLayoutHeaderId() {
+        return R.layout.lay_chat_user_header;
     }
 
     @Override

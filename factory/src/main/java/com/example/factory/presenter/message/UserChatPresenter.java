@@ -12,9 +12,9 @@ import java.util.List;
  * Created by wenjian on 2017/7/8.
  */
 
-public class UserChatPresenter extends ChatPresenter<User> {
+public class UserChatPresenter extends ChatPresenter<User,ChatContract.UserView> {
 
-    public UserChatPresenter(ChatContract.View<User> view, String receiverId) {
+    public UserChatPresenter(ChatContract.UserView view, String receiverId) {
         super(new MessageRepository(receiverId), view, receiverId, Message.RECEIVER_TYPE_NONE);
     }
 
@@ -26,11 +26,4 @@ public class UserChatPresenter extends ChatPresenter<User> {
         getView().onInit(user);
     }
 
-
-    @Override
-    public void onDataLoaded(List<Message> messages) {
-//        Collections.reverse(messages);
-        super.onDataLoaded(messages);
-
-    }
 }

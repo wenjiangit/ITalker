@@ -16,7 +16,6 @@ import com.example.commom.app.Application;
 import com.example.commom.app.PresenterFragment;
 import com.example.commom.widget.EmptyView;
 import com.example.commom.widget.PortraitView;
-import com.example.commom.widget.recycler.DefaultItemDecoration;
 import com.example.commom.widget.recycler.RecyclerAdapter;
 import com.example.factory.model.card.UserCard;
 import com.example.factory.presenter.contact.FollowContract;
@@ -73,6 +72,12 @@ public class UserSearchFragment extends PresenterFragment<SearchContract.Present
         });
         mEmptyView.bind(mRecycler);
         setPlaceHolderView(mEmptyView);
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
+        mPresenter.search("");
     }
 
     @Override

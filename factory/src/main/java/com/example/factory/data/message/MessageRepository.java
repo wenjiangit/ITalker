@@ -13,13 +13,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- *
+ * 个人消息
  * Created by wenjian on 2017/7/8.
  */
 
 public class MessageRepository extends BaseDbRepository<Message>
         implements MessageDataSource {
 
+    //消息接收者id
     private String mReceiverId;
     public MessageRepository(String receiverId) {
         super();

@@ -2,12 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.douliu.italker.frags.mian.GroupFragment">
+    tools:context="com.douliu.italker.frags.main.GroupFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@id/recycler"
-        android:paddingTop="@dimen/len_8"
-        android:paddingBottom="@dimen/len_8"
+        android:paddingTop="@dimen/len_4"
+        android:paddingBottom="@dimen/len_4"
         android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

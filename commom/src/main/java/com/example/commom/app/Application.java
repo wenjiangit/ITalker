@@ -3,10 +3,12 @@ package com.example.commom.app;
 
 import android.content.Context;
 import android.content.Intent;
-
 import android.os.SystemClock;
 import android.support.annotation.StringRes;
 import android.widget.Toast;
+
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 import net.qiujuer.genius.kit.handler.Run;
 import net.qiujuer.genius.kit.handler.runable.Action;
@@ -22,13 +24,27 @@ import java.io.File;
 public class Application extends android.app.Application {
 
     private static Application instance;
+    private RefWatcher refWatcher;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
+
+        //初始化LeakCanary
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        refWatcher = LeakCanary.install(this);
+
     }
 
+    public static RefWatcher getRefWatcher(Context context) {
+        Application application = (Application) context.getApplicationContext();
+        return application.refWatcher;
+    }
 
     /**
      * 获取Application实例

@@ -5,13 +5,8 @@ import android.text.TextUtils;
 import com.example.factory.data.BaseDbRepository;
 import com.example.factory.data.helper.GroupHelper;
 import com.example.factory.model.db.Group;
-import com.example.factory.model.db.GroupMember;
-import com.example.factory.model.db.GroupMember_Table;
 import com.example.factory.model.db.Group_Table;
-import com.example.factory.model.db.User;
-import com.example.factory.model.db.User_Table;
 import com.example.factory.model.sample.MemberUserModel;
-import com.raizlabs.android.dbflow.sql.language.Join;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.List;
@@ -44,8 +39,15 @@ public class GroupRepository extends BaseDbRepository<Group>
                 .async()
                 .queryListResultCallback(this)
                 .execute();
+
+
     }
 
+    /**
+     * 构建群成员信息
+     * @param group 群
+     * @return 群成员的前4个成员名称
+     */
     private String buildGroupHolder(Group group) {
         List<MemberUserModel> sampleData = group.getLatelySampleData();
         if (sampleData == null || sampleData.isEmpty()) {

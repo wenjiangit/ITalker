@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 25
@@ -17,6 +18,8 @@ android {
                 GETUI_APP_SECRET: "cpxWhT2CQh5bZlr10cdjo6"
         ]
         vectorDrawables.useSupportLibrary = true
+
+
     }
     buildTypes {
         release {
@@ -33,6 +36,10 @@ android {
 
     aaptOptions {
         cruncherEnabled = false
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
     }
 }
 

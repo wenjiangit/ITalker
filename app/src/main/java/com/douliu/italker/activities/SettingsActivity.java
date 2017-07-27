@@ -30,8 +30,6 @@ public class SettingsActivity extends ToolbarActivity {
     protected void initWidget() {
         super.initWidget();
         setTitle(R.string.title_activity_settings);
-
-
     }
 
     @OnClick(R.id.btn_login_out)

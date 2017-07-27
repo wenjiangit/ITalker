@@ -1,5 +1,8 @@
 package com.example.commom.factory.presenter;
 
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+
 /**
  * Presenter的基类
  *
@@ -14,6 +17,8 @@ public abstract class BasePresenter<T extends BaseContract.View>
     public BasePresenter(T view) {
         setView(view);
     }
+
+    private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
     /**
      * 将presenter与view进行双向绑定
@@ -41,6 +46,12 @@ public abstract class BasePresenter<T extends BaseContract.View>
         }
     }
 
+    protected void addDisposable(Disposable disposable) {
+        mCompositeDisposable.add(disposable);
+    }
+
+
+
     /**
      * 将presenter与view进行解绑
      */
@@ -49,6 +60,7 @@ public abstract class BasePresenter<T extends BaseContract.View>
     public void destroy() {
         T view = mView;
         mView = null;
+        mCompositeDisposable.clear();
         if (view != null) {
             view.setPresenter(null);
         }

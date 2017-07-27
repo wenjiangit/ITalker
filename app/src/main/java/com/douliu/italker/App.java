@@ -13,7 +13,6 @@ import com.igexin.sdk.PushManager;
 
 public class App extends Application {
 
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -27,5 +26,9 @@ public class App extends Application {
         PushManager.getInstance().registerPushIntentService(this.getApplicationContext(),
                 MessageService.class);
 
+
+
     }
+
+
 }

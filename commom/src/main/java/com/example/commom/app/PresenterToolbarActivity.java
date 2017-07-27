@@ -1,6 +1,5 @@
 package com.example.commom.app;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 
@@ -52,7 +51,7 @@ public abstract class PresenterToolbarActivity<P extends BaseContract.Presenter>
         } else {
             ProgressDialog dialog = mProgressDialog;
             if (dialog == null) {
-                dialog = new ProgressDialog(this);
+                dialog = new ProgressDialog(this,R.style.AppCompat_Dialog);
                 dialog.setMessage(getText(R.string.prompt_loading));
                 dialog.setCanceledOnTouchOutside(false);
                 dialog.setCancelable(true);

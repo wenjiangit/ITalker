@@ -15,6 +15,7 @@ import com.example.factory.model.card.UserCard;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -72,6 +73,9 @@ public interface RemoteService {
     //群搜索
     @GET("group/search/{name}")
     Call<RspModel<List<GroupCard>>> groupSearch(@Path(value = "name",encoded = true) String name);
+    //群搜索
+    @GET("group/search/{name}")
+    Observable<RspModel<List<GroupCard>>> rxGroupSearch(@Path(value = "name",encoded = true) String name);
 
     //群成员
     @GET("group/{groupId}/member")

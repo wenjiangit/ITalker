@@ -6,6 +6,7 @@ import com.example.commom.factory.presenter.BaseContract;
 import com.example.factory.model.db.Group;
 import com.example.factory.model.db.Message;
 import com.example.factory.model.db.User;
+import com.example.factory.model.sample.MemberUserModel;
 
 import java.util.List;
 
@@ -40,6 +41,10 @@ public interface ChatContract {
     }
 
     interface GroupView extends View<Group> {
+
+        void showAdminOption(boolean isAdmin);
+
+        void showGroupMemberInfo(List<MemberUserModel> models, int moreCount);
     }
 
 

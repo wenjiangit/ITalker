@@ -1,4 +1,4 @@
-package com.douliu.italker.frags.mian;
+package com.douliu.italker.frags.main;
 
 
 import android.support.v7.widget.DividerItemDecoration;

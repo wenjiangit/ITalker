@@ -3,8 +3,10 @@ package com.example.factory.net;
 import android.text.TextUtils;
 
 import com.example.commom.Common;
+import com.example.factory.BuildConfig;
 import com.example.factory.Factory;
 import com.example.factory.persistant.Account;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.io.IOException;
 
@@ -12,6 +14,7 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -23,15 +26,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Network {
 
-    private static Network instance;
-
     private Retrofit retrofit;
 
     private Network() {
     }
 
-    static {
-        instance = new Network();
+    private static class InstanceHolder{
+        private static final Network instance = new Network();
+    }
+
+    private static Network instance() {
+        return InstanceHolder.instance;
     }
 
     /**
@@ -39,11 +44,11 @@ public class Network {
      * @return Retrofit
      */
     private static Retrofit getRetrofit() {
-        if (instance.retrofit != null) {
-            return instance.retrofit;
+        if (instance().retrofit != null) {
+            return instance().retrofit;
         }
 
-        OkHttpClient client = new OkHttpClient.Builder()
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .addInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
@@ -56,15 +61,23 @@ public class Network {
                         Request newRequest = builder.build();
                         return chain.proceed(newRequest);
                     }
-                }).build();
+                });
 
-        instance.retrofit = new Retrofit.Builder()
+        if (BuildConfig.DEBUG) {
+            //添加日志拦截器
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            builder.addInterceptor(interceptor);
+        }
+
+        instance().retrofit = new Retrofit.Builder()
                 .baseUrl(Common.Constants.API_URL)
-                .client(client)
+                .client(builder.build())
                 .addConverterFactory(GsonConverterFactory.create(Factory.getGson()))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
-        return instance.retrofit;
+        return instance().retrofit;
     }
 
 

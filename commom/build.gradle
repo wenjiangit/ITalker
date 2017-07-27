@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 25
@@ -39,6 +40,17 @@ dependencies {
     compile "de.hdodenhof:circleimageview:$rootProject.ext.circleVersion"
     compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
+
+    //内存检测
+    debugCompile "com.squareup.leakcanary:leakcanary-android:${rootProject.ext.leakcanaryVersion}"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:${rootProject.ext.leakcanaryVersion}"
+    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:${rootProject.ext.leakcanaryVersion}"
+
+    //RxJava2 Adapter
+    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    compile "io.reactivex.rxjava2:rxjava:2.1.0"
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
 
     compile "net.qiujuer.genius:kit-handler:$rootProject.ext.geniusVersion"
     testCompile 'junit:junit:4.12'

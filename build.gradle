@@ -8,6 +8,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.2'
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.6.0'
+        classpath 'me.tatarka:gradle-retrolambda:3.7.0'
 
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -45,5 +46,7 @@ ext{
     retrofitVersion = '2.1.0'
     getuiVersion = "2.10.2.0"
     dbflowVersion = "4.0.0-beta7"
-
+    leakcanaryVersion = "1.5.1"
 }
+
+apply plugin: 'me.tatarka.retrolambda'
