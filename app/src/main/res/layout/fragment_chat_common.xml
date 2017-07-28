@@ -20,6 +20,7 @@
             android:background="@color/trans">
 
             <ViewStub
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
                 android:id="@+id/view_stub_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

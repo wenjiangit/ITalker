@@ -9,7 +9,6 @@ import com.example.factory.model.api.GroupCreateModel;
 import com.example.factory.model.api.RspModel;
 import com.example.factory.model.card.GroupCard;
 import com.example.factory.model.card.GroupMemberCard;
-import com.example.factory.model.card.UserCard;
 import com.example.factory.model.db.Group;
 import com.example.factory.model.db.GroupMember;
 import com.example.factory.model.db.GroupMember_Table;
@@ -182,7 +181,7 @@ public class GroupHelper {
                 .count();
     }
 
-    public static List<MemberUserModel> getLatelySampleData(String id, int size) {
+    public static List<MemberUserModel> getLatelyGroupMembers(String id, int size) {
         return  SQLite.select(GroupMember_Table.alias.withTable().as("alias"),
                 User_Table.id.withTable().as("userId"),
                 User_Table.name.withTable().as("name"),

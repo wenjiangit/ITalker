@@ -49,7 +49,7 @@ public class GroupRepository extends BaseDbRepository<Group>
      * @return 群成员的前4个成员名称
      */
     private String buildGroupHolder(Group group) {
-        List<MemberUserModel> sampleData = group.getLatelySampleData();
+        List<MemberUserModel> sampleData = group.getLatelyGroupMembers();
         if (sampleData == null || sampleData.isEmpty()) {
             return null;
         }

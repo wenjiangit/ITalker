@@ -70,8 +70,9 @@ public class ActiveFragment extends PresenterFragment<SessionContract.Presenter>
     }
 
     @Override
-    protected void initData() {
-        super.initData();
+    protected void onFirstInit() {
+        super.onFirstInit();
+        //在第一次初始化的加载数据库数据
         mPresenter.start();
     }
 

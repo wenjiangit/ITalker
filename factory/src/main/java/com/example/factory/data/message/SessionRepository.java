@@ -8,6 +8,7 @@ import com.example.factory.model.db.Session_Table;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.database.transaction.QueryTransaction;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,14 +39,23 @@ public class SessionRepository extends BaseDbRepository<Session>
     @Override
     protected void insert(Session session) {
         //添加数据到第一个
+//        super.insert(session);
         mDataList.addFirst(session);
+    }
+
+    @Override
+    protected void replace(int index, Session session) {
+//        super.replace(index, session);
+        //replace的时候将Session添加到第一位
+        mDataList.remove(index);
+        mDataList.add(0, session);
     }
 
     @Override
     public void onListQueryResult(QueryTransaction transaction, @NonNull List<Session> tResult) {
 
         //反转
-//        Collections.reverse(mDataList);
+        Collections.reverse(mDataList);
         super.onListQueryResult(transaction, tResult);
 
     }

@@ -81,6 +81,10 @@ public interface RemoteService {
     @GET("group/{groupId}/member")
     Call<RspModel<List<GroupMemberCard>>> groupMembers(@Path("groupId") String groupId);
 
+    //群成员
+    @GET("group/{groupId}/member")
+    Observable<RspModel<List<GroupMemberCard>>> members(@Path("groupId") String groupId);
+
     //添加群成员
     @POST("group/{groupId}/member")
     Call<RspModel<List<GroupMemberCard>>> groupMemberAdd(@Path("groupId") String groupId,

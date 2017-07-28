@@ -169,9 +169,9 @@ public class Group extends BaseDbModel<Group> implements Serializable {
      *
      * @return List<MemberUserModel>
      */
-    public List<MemberUserModel> getLatelySampleData() {
+    public List<MemberUserModel> getLatelyGroupMembers() {
         if (mLatelySampleData == null) {
-            mLatelySampleData = GroupHelper.getLatelySampleData(id, 4);
+            mLatelySampleData = GroupHelper.getLatelyGroupMembers(id, 4);
         }
         return mLatelySampleData;
     }

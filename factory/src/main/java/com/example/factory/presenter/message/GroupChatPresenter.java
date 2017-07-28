@@ -5,6 +5,7 @@ import com.example.factory.data.message.MessageGroupRepository;
 import com.example.factory.model.db.Group;
 import com.example.factory.model.db.Message;
 import com.example.factory.model.sample.MemberUserModel;
+import com.example.factory.persistant.Account;
 
 import java.util.List;
 
@@ -25,17 +26,20 @@ public class GroupChatPresenter extends ChatPresenter<Group,ChatContract.GroupVi
 
         Group group = GroupHelper.findFromLocal(mReceiverId);
         if (group != null) {
-            getView().onInit(group);
-            List<MemberUserModel> sampleData = group.getLatelySampleData();
+            final ChatContract.GroupView view = getView();
+
+            //判断是不是管理人,这里当前只支持群主添加成员 TODO  管理员也可以添加成员
+            boolean isAdmin = Account.getUserId().equalsIgnoreCase(group.getOwner().getId());
+            view.showAdminOption(isAdmin);
+
+            view.onInit(group);
+
+            List<MemberUserModel> members = group.getLatelyGroupMembers();
             long memberCount = group.getGroupMemberCount();
-            if (sampleData == null || sampleData.size() == 0 || memberCount == 0) {
-                return;
-            }
 
-            getView().showGroupMemberInfo(sampleData, (int) (memberCount > 4 ? memberCount - 4 : memberCount));
-
-//            getView().showAdminOption();
-
+            long size = members.size();
+            long moreCount = memberCount > size ? memberCount - size : 0;
+            view.showGroupMemberInfo(members, moreCount);
         }
 
 

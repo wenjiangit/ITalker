@@ -24,6 +24,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
+ * 单聊界面
  * A simple {@link Fragment} subclass.
  */
 public class UserChatFragment extends ChatFragment<User>

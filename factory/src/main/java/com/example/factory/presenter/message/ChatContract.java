@@ -44,7 +44,7 @@ public interface ChatContract {
 
         void showAdminOption(boolean isAdmin);
 
-        void showGroupMemberInfo(List<MemberUserModel> models, int moreCount);
+        void showGroupMemberInfo(List<MemberUserModel> models, long moreCount);
     }
 
 

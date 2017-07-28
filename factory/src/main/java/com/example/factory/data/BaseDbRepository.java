@@ -3,9 +3,8 @@ package com.example.factory.data;
 import android.support.annotation.NonNull;
 
 import com.example.commom.factory.data.DbDataSource;
-import com.example.commom.utils.CollectionUtil;
-import com.example.factory.model.db.BaseDbModel;
 import com.example.factory.data.helper.DbHelper;
+import com.example.factory.model.db.BaseDbModel;
 import com.raizlabs.android.dbflow.structure.database.transaction.QueryTransaction;
 
 import net.qiujuer.genius.kit.reflect.Reflector;
@@ -127,9 +126,10 @@ public abstract class BaseDbRepository<Data extends BaseDbModel<Data>>
             return;
         }
 
-        Data[] users = CollectionUtil.toArray(tResult, mDataClass);
-        onDataSave(users);
-
+        /*Data[] users = CollectionUtil.toArray(tResult, mDataClass);
+        onDataSave(users);*/
+        mDataList.addAll(tResult);
+        notifyDataChanged();
     }
 
     /**
