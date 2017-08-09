@@ -1,24 +1,25 @@
 package com.example.factory.presenter.group;
 
 import com.example.commom.factory.presenter.BaseRecyclerPresenter;
+import com.example.factory.data.helper.GroupHelper;
 import com.example.factory.data.helper.UserHelper;
 import com.example.factory.model.card.GroupMemberCard;
-import com.example.factory.model.db.GroupMember;
-import com.example.factory.model.db.GroupMember_Table;
 import com.example.factory.model.db.User;
 import com.example.factory.model.sample.MemberUserModel;
 import com.example.factory.net.Network;
-import com.raizlabs.android.dbflow.sql.language.SQLite;
+import com.example.factory.rx.RxUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- *
  * Created by douliu on 2017/7/28.
  */
 
@@ -27,7 +28,7 @@ public class GroupMemberPresenter extends BaseRecyclerPresenter<MemberUserModel,
 
     private String mGroupId;
 
-    public GroupMemberPresenter(GroupMemberContract.View view,String groupId) {
+    public GroupMemberPresenter(GroupMemberContract.View view, String groupId) {
         super(view);
         mGroupId = groupId;
     }
@@ -35,48 +36,50 @@ public class GroupMemberPresenter extends BaseRecyclerPresenter<MemberUserModel,
     @Override
     public void start() {
         super.start();
-
-        List<GroupMember> members = SQLite.select()
-                .from(GroupMember.class)
-                .where(GroupMember_Table.group_id.eq(mGroupId))
-                .queryList();
-
-
-        List<MemberUserModel> modelList = new ArrayList<>();
-        for (GroupMember member : members) {
-            User user = member.getUser();
-            user.load();
-            MemberUserModel model = new MemberUserModel(user);
-            modelList.add(model);
-        }
-
-        refreshData(modelList);
+        //-1 查询所有
+        Disposable disposable = Observable.just(GroupHelper.getLatelyGroupMembers(mGroupId, -1))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<MemberUserModel>>() {
+                    @Override
+                    public void accept(List<MemberUserModel> models) throws Exception {
+                        refreshDataByRx(models);
+                    }
+                });
+        addDisposable(disposable);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void refresh() {
         Network.remote().members(mGroupId)
                 .subscribeOn(Schedulers.io())
-                .flatMap(rspModel -> {
-                    List<GroupMemberCard> memberCards = rspModel.getResult();
-                        List<User> users = new ArrayList<>();
-                        for (GroupMemberCard memberCard : memberCards) {
+                .map(RxUtils.<List<GroupMemberCard>>convert())
+                .map(new Function<List<GroupMemberCard>, List<MemberUserModel>>() {
+                    @Override
+                    public List<MemberUserModel> apply(List<GroupMemberCard> groupMemberCards) throws Exception {
+                        List<MemberUserModel> models = new ArrayList<>();
+                        for (GroupMemberCard memberCard : groupMemberCards) {
                             String userId = memberCard.getUserId();
                             User user = UserHelper.search(userId);
-                            users.add(user);
+                            MemberUserModel model = new MemberUserModel(user);
+                            models.add(model);
                         }
-                        return Observable.fromArray(users);
-
-                })
-                .map(users -> {
-                    List<MemberUserModel> models = new ArrayList<>();
-                    for (User user : users) {
-                        MemberUserModel model = new MemberUserModel(user);
-                        models.add(model);
+                        return models;
                     }
-                    return models;
-                }).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::refreshData);
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Exception {
+                        addDisposable(disposable);
+                    }
+                })
+                .subscribe(new Consumer<List<MemberUserModel>>() {
+                    @Override
+                    public void accept(List<MemberUserModel> models) throws Exception {
+                        refreshDataByRx(models);
+                    }
+                });
+
     }
 }

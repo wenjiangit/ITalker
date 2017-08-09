@@ -39,8 +39,6 @@ public class GroupRepository extends BaseDbRepository<Group>
                 .async()
                 .queryListResultCallback(this)
                 .execute();
-
-
     }
 
     /**

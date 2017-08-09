@@ -6,7 +6,9 @@ import android.graphics.drawable.Drawable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -93,15 +95,17 @@ public class GroupChatFragment extends ChatFragment<Group>
             return;
         }
         mToolbar.inflateMenu(R.menu.group_chat);
-        mToolbar.setOnMenuItemClickListener(item -> {
-            if (item.getItemId() == R.id.action_member_add) {
-                // 添加群成员
-                GroupMemberActivity.show(getContext(), mReceiverId);
-                return true;
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.action_member_add) {
+                    // 添加群成员
+                    GroupMemberActivity.showAdmin(getContext(), mReceiverId);
+                    return true;
+                }
+                return false;
             }
-            return false;
         });
-
     }
 
     @SuppressLint("DefaultLocale")
@@ -112,7 +116,7 @@ public class GroupChatFragment extends ChatFragment<Group>
         }
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        for (MemberUserModel model : models) {
+        for (final MemberUserModel model : models) {
             ImageView portraitView = (ImageView) inflater.inflate(R.layout.chat_group_menber_portrait,
                     mLayMembers, false);
 
@@ -125,14 +129,22 @@ public class GroupChatFragment extends ChatFragment<Group>
                     .into(portraitView);
 
             //为头像添加点击事件
-            portraitView.setOnClickListener(v -> PersonalActivity.show(getActivity(),model.userId));
+            portraitView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PersonalActivity.show(getActivity(), model.userId);
+                }
+            });
         }
 
         if (moreCount > 0) {
             mTxtMore.setText(String.format("+%d", moreCount));
-            mTxtMore.setOnClickListener(v -> {
-                // 添加群成员
-                GroupMemberActivity.show(getContext(), mReceiverId);
+            mTxtMore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 添加群成员
+                    GroupMemberActivity.show(getContext(), mReceiverId);
+                }
             });
         } else {
             mTxtMore.setVisibility(View.GONE);

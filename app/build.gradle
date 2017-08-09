@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 25
@@ -37,10 +36,7 @@ android {
     aaptOptions {
         cruncherEnabled = false
     }
-    compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
-    }
+
 }
 
 

@@ -10,17 +10,17 @@ import net.qiujuer.genius.kit.handler.runable.Action;
 import java.util.List;
 
 /**
- *
  * Created by douliu on 2017/6/29.
  */
 
-public class BaseRecyclerPresenter<Model,View extends BaseContract.RecyclerView> extends BasePresenter<View>{
+public class BaseRecyclerPresenter<Model, View extends BaseContract.RecyclerView> extends BasePresenter<View> {
     public BaseRecyclerPresenter(View view) {
         super(view);
     }
 
     /**
      * 刷新数据
+     *
      * @param dataList 新的数据
      */
     @SuppressWarnings("unchecked")
@@ -38,9 +38,24 @@ public class BaseRecyclerPresenter<Model,View extends BaseContract.RecyclerView>
     }
 
     /**
+     * 刷新数据
+     *
+     * @param dataList 新的数据
+     */
+    @SuppressWarnings("unchecked")
+    protected void refreshDataByRx(final List<Model> dataList) {
+        final View view = getView();
+        if (view == null) return;
+        RecyclerAdapter<Model> adapter = view.getRecyclerAdapter();
+        adapter.replace(dataList);
+        view.onAdapterDataChanged();
+    }
+
+    /**
      * 增量刷新数据
+     *
      * @param diffResult 对比操作的结果
-     * @param dataList 新的数据集
+     * @param dataList   新的数据集
      */
     protected void refreshData(final DiffUtil.DiffResult diffResult, final List<Model> dataList) {
         Run.onUiAsync(new Action() {

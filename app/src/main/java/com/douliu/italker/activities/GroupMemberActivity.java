@@ -23,19 +23,29 @@ import butterknife.BindView;
 public class GroupMemberActivity extends PresenterToolbarActivity<GroupMemberContract.Presenter>
         implements GroupMemberContract.View {
 
-
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
 
     private RecyclerAdapter<MemberUserModel> mAdapter;
-    private static final String EXTRA_GROUP_ID = "extra_group_id";
+    private static final String KEY_GROUP_ID = "extra_group_id";
+    private static final String KEY_IS_ADMIN = "IS_ADMIN";
 
     private String mGroupId;
+    private boolean mIsAdmin;
+
+    public static void show(Context context, String groupId, boolean isAdmin) {
+        Intent intent = new Intent(context, GroupMemberActivity.class)
+                .putExtra(KEY_GROUP_ID, groupId)
+                .putExtra(KEY_IS_ADMIN, isAdmin);
+        context.startActivity(intent);
+    }
+
+    public static void showAdmin(Context context, String groupId) {
+        show(context, groupId, true);
+    }
 
     public static void show(Context context, String groupId) {
-        Intent intent = new Intent(context, GroupMemberActivity.class)
-                .putExtra(EXTRA_GROUP_ID, groupId);
-        context.startActivity(intent);
+        show(context, groupId, false);
     }
 
     @Override
@@ -45,7 +55,8 @@ public class GroupMemberActivity extends PresenterToolbarActivity<GroupMemberCon
 
     @Override
     protected boolean initArgs(Bundle bundle) {
-        mGroupId = bundle.getString(EXTRA_GROUP_ID);
+        mGroupId = bundle.getString(KEY_GROUP_ID);
+        mIsAdmin = bundle.getBoolean(KEY_IS_ADMIN);
         return !TextUtils.isEmpty(mGroupId);
     }
 
@@ -60,6 +71,7 @@ public class GroupMemberActivity extends PresenterToolbarActivity<GroupMemberCon
     protected void initData() {
         super.initData();
         mPresenter.start();
+        mPresenter.refresh();
     }
 
     @Override
@@ -77,7 +89,7 @@ public class GroupMemberActivity extends PresenterToolbarActivity<GroupMemberCon
         return new GroupMemberPresenter(this, mGroupId);
     }
 
-    class Adapter extends RecyclerAdapter<MemberUserModel>{
+    class Adapter extends RecyclerAdapter<MemberUserModel> {
         @Override
         protected int getItemViewType(int position, MemberUserModel memberUserModel) {
             return R.layout.cell_group_create_contact;
@@ -89,7 +101,7 @@ public class GroupMemberActivity extends PresenterToolbarActivity<GroupMemberCon
         }
     }
 
-    class ViewHolder extends RecyclerAdapter.ViewHolder<MemberUserModel>{
+    class ViewHolder extends RecyclerAdapter.ViewHolder<MemberUserModel> {
 
         @BindView(R.id.txt_name)
         TextView mTxtName;
