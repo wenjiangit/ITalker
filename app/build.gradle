@@ -70,6 +70,8 @@ dependencies {
 
     //个推sdk
     compile "com.getui:sdk:$rootProject.ext.getuiVersion"
+    //空气面板
+    compile "net.qiujuer.widget:airpanel:$rootProject.ext.airpanelVersion"
 
     testCompile 'junit:junit:4.12'
 

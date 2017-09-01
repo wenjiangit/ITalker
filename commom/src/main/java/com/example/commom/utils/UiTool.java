@@ -18,7 +18,8 @@ public class UiTool {
 
     /**
      * 获取屏幕高度
-     * @param context
+     *
+     * @param context Context
      * @return
      */
     public static int getScreenHeigh(Context context) {
@@ -26,9 +27,21 @@ public class UiTool {
         return metrics.heightPixels;
     }
 
+    /**
+     * 获取屏幕宽度
+     *
+     * @param context Context
+     * @return
+     */
+    public static int getScreenWidth(Context context) {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        return metrics.widthPixels;
+    }
+
 
     /**
      * 获取状态栏的高度
+     *
      * @param context
      * @return
      */

@@ -41,8 +41,14 @@ public class LoginPresenter extends BasePresenter<LoginContract.View>
             getView().showError(R.string.data_account_login_error_validate);
         } else {
             LoginModel model = new LoginModel(phone, password, Account.getPushId());
-            AccountHelper.login(model, this);
+            doLogin(model);
         }
+
+    }
+
+
+    private void doLogin(LoginModel model) {
+        AccountHelper.login(model, this);
 
     }
 

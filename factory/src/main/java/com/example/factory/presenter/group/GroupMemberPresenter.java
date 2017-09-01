@@ -51,7 +51,7 @@ public class GroupMemberPresenter extends BaseRecyclerPresenter<MemberUserModel,
 
     @Override
     public void refresh() {
-        Network.remote().members(mGroupId)
+        Network.rxRemote().members(mGroupId)
                 .subscribeOn(Schedulers.io())
                 .map(RxUtils.<List<GroupMemberCard>>convert())
                 .map(new Function<List<GroupMemberCard>, List<MemberUserModel>>() {

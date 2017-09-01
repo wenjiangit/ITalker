@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.douliu.italker.R;
 import com.douliu.italker.activities.MessageActivity;
+import com.douliu.italker.frags.panel.PanelFragment;
 import com.example.commom.app.PresenterFragment;
 import com.example.commom.widget.PortraitView;
 import com.example.commom.widget.TextWatcherAdapter;
@@ -31,6 +32,8 @@ import com.example.factory.persistant.Account;
 import com.example.factory.presenter.message.ChatContract;
 
 import net.qiujuer.genius.ui.widget.Loading;
+import net.qiujuer.widget.airpanel.AirPanel;
+import net.qiujuer.widget.airpanel.Util;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -59,6 +62,8 @@ public abstract class ChatFragment<InitModel> extends PresenterFragment<ChatCont
 
     protected String mReceiverId;
     private ChatAdapter mAdapter;
+    private AirPanel.Boss mAirPanelBoss;
+    private PanelFragment mPanelFragment;
 
     @Override
     protected void initArgs(Bundle arguments) {
@@ -86,6 +91,18 @@ public abstract class ChatFragment<InitModel> extends PresenterFragment<ChatCont
         //加载头布局必须在butterknife绑定控件之前
         //不然会出现找不到资源的异常
         super.initWidget(rootView);
+
+        //初始化空气面板
+        mAirPanelBoss = (AirPanel.Boss) rootView.findViewById(R.id.lay_content);
+        mAirPanelBoss.setup(new AirPanel.PanelListener() {
+            @Override
+            public void requestHideSoftKeyboard() {
+                //隐藏软键盘
+                Util.hideKeyboard(mEditContent);
+            }
+        });
+
+        mPanelFragment = (PanelFragment) getChildFragmentManager().findFragmentById(R.id.frag_panel);
 
         initToolbar();
         initAppbar();
@@ -127,14 +144,18 @@ public abstract class ChatFragment<InitModel> extends PresenterFragment<ChatCont
 
     }
 
+    //表情
     @OnClick(R.id.btn_face)
     void onFaceClick() {
-
+        mAirPanelBoss.openPanel();
+        mPanelFragment.showFace();
     }
 
+    //录音
     @OnClick(R.id.btn_record)
     void onRecordClick() {
-
+        mAirPanelBoss.openPanel();
+        mPanelFragment.showRecord();
     }
 
     @OnClick(R.id.btn_submit)
@@ -153,8 +174,10 @@ public abstract class ChatFragment<InitModel> extends PresenterFragment<ChatCont
         mPresenter.pushText(content);
     }
 
+    //更多
     protected void onMoreClick() {
-
+        mAirPanelBoss.openPanel();
+        mPanelFragment.showGallery();
     }
 
     @Override

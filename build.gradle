@@ -47,5 +47,6 @@ ext{
     getuiVersion = "2.10.2.0"
     dbflowVersion = "4.0.0-beta7"
     leakcanaryVersion = "1.5.1"
+    airpanelVersion = "1.1.0"
 }
 

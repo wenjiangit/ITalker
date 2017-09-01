@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.example.commom.Common;
 import com.example.factory.BuildConfig;
 import com.example.factory.Factory;
+import com.example.factory.net.rx.RxRemoteService;
 import com.example.factory.persistant.Account;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -20,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * 网络请求
- *
+ * <p>
  * Created by wenjian on 2017/6/14.
  */
 
@@ -31,7 +32,7 @@ public class Network {
     private Network() {
     }
 
-    private static class InstanceHolder{
+    private static class InstanceHolder {
         private static final Network instance = new Network();
     }
 
@@ -41,6 +42,7 @@ public class Network {
 
     /**
      * 获取retrofit的实例
+     *
      * @return Retrofit
      */
     private static Retrofit getRetrofit() {
@@ -86,6 +88,9 @@ public class Network {
     }
 
 
+    public static RxRemoteService rxRemote() {
+        return getRetrofit().create(RxRemoteService.class);
+    }
 
 
 }

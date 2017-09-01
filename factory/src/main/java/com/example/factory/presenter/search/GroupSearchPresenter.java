@@ -39,8 +39,8 @@ public class GroupSearchPresenter extends BasePresenter<SearchContract.GroupView
             mCall.cancel();
         }
         mCall = GroupHelper.search(content, this);*/
-        Network.remote()
-                .rxGroupSearch(content)
+        Network.rxRemote()
+                .groupSearch(content)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
