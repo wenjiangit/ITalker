@@ -25,15 +25,16 @@ public class Face {
     }
 
 
-    public static void input(@NonNull Context context, Editable editable) {
+    /**
+     * 输入表情
+     * @param context Context
+     * @param editable EditText
+     * @param bean face数据
+     * @param size 大小
+     */
+    public static void input(@NonNull Context context, Editable editable, Bean bean, int size) {
+
     }
-
-
-/*
-  public static void input(@NonNull Context context, Editable editable) {
-    }
-*/
-
 
 
 

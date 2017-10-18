@@ -62,8 +62,10 @@ public class LaunchActivity extends BaseActivity {
      * 等待个推框架为我们生成clientId
      */
     private void waitPushReceiverId() {
-        if (Account.isLogin()) {//是否已经登录过
-            if (Account.isBind()) {//是否已经绑定过pushId
+        //是否已经登录过
+        if (Account.isLogin()) {
+            //是否已经绑定过pushId
+            if (Account.isBind()) {
                 skip();
                 return;
             }

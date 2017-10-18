@@ -7,8 +7,8 @@ import com.example.factory.Factory;
 import com.igexin.sdk.PushManager;
 
 /**
- *
- * Created by wenjian on 2017/6/7.
+ * @author wenjian
+ * @date on 2017/6/7.
  */
 
 public class App extends Application {

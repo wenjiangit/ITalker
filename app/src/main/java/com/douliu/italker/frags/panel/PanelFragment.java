@@ -19,7 +19,7 @@ import com.example.commom.utils.UiTool;
 import net.qiujuer.genius.ui.Ui;
 
 /**
- *
+ *  面板布局
  */
 public class PanelFragment extends BaseFragment {
 
@@ -104,13 +104,22 @@ public class PanelFragment extends BaseFragment {
                     .inflate(R.layout.lay_face_content, container, false);
             recyclerView.setLayoutManager(new GridLayoutManager(getContext(), mSpanCount));
 
+            
+
             return recyclerView;
         }
+
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
         }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return Face.all(getContext()).get(position).name;
+        }
+
     }
 
 
