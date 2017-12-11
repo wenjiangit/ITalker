@@ -12,7 +12,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * 圆形头像控件
- * Created by wenjian on 2017/6/4.
+ *
+ * @author wenjian
+ * @date 2017/6/4
  */
 
 public class PortraitView extends CircleImageView {
@@ -33,14 +35,18 @@ public class PortraitView extends CircleImageView {
     }
 
     public void setup(RequestManager manager, Author author) {
-        if (author == null) return;
+        if (author == null) {
+            return;
+        }
         this.setup(manager, author.getPortrait());
     }
 
 
     public void setup(RequestManager manager, int holderId, String url) {
         if (url == null)//避免报错
+        {
             url = "";
+        }
         manager.load(url)
                 .apply(RequestOptions.centerCropTransform())
                 .apply(RequestOptions.placeholderOf(holderId))

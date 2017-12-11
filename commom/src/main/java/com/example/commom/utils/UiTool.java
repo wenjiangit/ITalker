@@ -10,7 +10,9 @@ import net.qiujuer.genius.ui.Ui;
 import java.lang.reflect.Field;
 
 /**
- * Created by wenjian on 2017/6/7.
+ *
+ * @author wenjian
+ * @date 2017/6/7
  */
 
 public class UiTool {
@@ -22,7 +24,7 @@ public class UiTool {
      * @param context Context
      * @return
      */
-    public static int getScreenHeigh(Context context) {
+    public static int getScreenHeight(Context context) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         return metrics.heightPixels;
     }

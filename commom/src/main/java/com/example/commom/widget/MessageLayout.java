@@ -11,7 +11,9 @@ import net.qiujuer.widget.airpanel.AirPanelLinearLayout;
 
 /**
  *
- * Created by douliu on 2017/7/6.
+ * 解决fitSystemWindow导致的状态栏灰色 ，并导致沉浸式效果失效
+ * @author douliu
+ * @date 2017/7/6
  */
 
 public class MessageLayout extends AirPanelLinearLayout {

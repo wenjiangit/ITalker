@@ -39,12 +39,12 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- *
- * Created by douliu on 2017/7/6.
+ * @author douliu
+ * @date 2017/7/6
  */
 
 public abstract class ChatFragment<InitModel> extends PresenterFragment<ChatContract.Presenter>
-        implements AppBarLayout.OnOffsetChangedListener,ChatContract.View<InitModel> {
+        implements AppBarLayout.OnOffsetChangedListener, ChatContract.View<InitModel> {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -216,8 +216,9 @@ public abstract class ChatFragment<InitModel> extends PresenterFragment<ChatCont
                     return isRight ? R.layout.cell_chat_audio_right : R.layout.cell_chat_audio_left;
                 case Message.TYPE_FILE:
                     return isRight ? R.layout.cell_chat_file_right : R.layout.cell_chat_file_left;
+                default:
+                    return 0;
             }
-            return 0;
         }
 
         @Override
@@ -246,7 +247,9 @@ public abstract class ChatFragment<InitModel> extends PresenterFragment<ChatCont
     }
 
 
-    //基类Holder
+    /**
+     * 基类Holder
+     */
     class BaseViewHolder extends RecyclerAdapter.ViewHolder<Message> {
 
         @BindView(R.id.im_portrait)
@@ -296,7 +299,9 @@ public abstract class ChatFragment<InitModel> extends PresenterFragment<ChatCont
         }
     }
 
-    //文本
+    /**
+     * 文本
+     */
     class TextViewHolder extends BaseViewHolder {
 
         @BindView(R.id.txt_content)
@@ -313,7 +318,9 @@ public abstract class ChatFragment<InitModel> extends PresenterFragment<ChatCont
         }
     }
 
-    //图片
+    /**
+     * 图片
+     */
     class PicViewHolder extends BaseViewHolder {
 
         public PicViewHolder(View itemView) {
@@ -321,7 +328,9 @@ public abstract class ChatFragment<InitModel> extends PresenterFragment<ChatCont
         }
     }
 
-    //语音
+    /**
+     * 语音
+     */
     class AudioViewHolder extends BaseViewHolder {
 
         public AudioViewHolder(View itemView) {
@@ -329,7 +338,9 @@ public abstract class ChatFragment<InitModel> extends PresenterFragment<ChatCont
         }
     }
 
-    //文件
+    /**
+     * 文件
+     */
     class FileViewHolder extends BaseViewHolder {
 
         public FileViewHolder(View itemView) {

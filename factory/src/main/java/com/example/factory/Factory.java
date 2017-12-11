@@ -34,7 +34,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 /**
- * Created by wenjian on 2017/6/9.
+ * @author wenjian
+ * @date 2017/6/9
  */
 
 public class Factory {
@@ -156,7 +157,8 @@ public class Factory {
 
     /**
      * 处理错误码
-     * @param resId 资源id
+     *
+     * @param resId    资源id
      * @param callback 回调
      */
     private static void decodeRspCode(@StringRes final int resId, final DataSource.FailedCallback callback) {
@@ -167,7 +169,9 @@ public class Factory {
 
     public static void dispatchMessage(String str) {
         PushModel model = PushModel.decode(str);
-        if (model == null) return;
+        if (model == null) {
+            return;
+        }
 
         for (PushModel.Entity entity : model.getEntities()) {
             Log.i(TAG, "dispatchMessage: " + entity);
@@ -204,6 +208,8 @@ public class Factory {
                     // TODO: 2017/7/2 退出通知
 
                     break;
+                default:
+                    break;
 
             }
         }
@@ -211,6 +217,7 @@ public class Factory {
 
     /**
      * 获取用户数据调度中心
+     *
      * @return UserDispatcher
      */
     public static UserCenter getUserCenter() {
@@ -219,20 +226,21 @@ public class Factory {
 
     /**
      * 获取消息调度中心
+     *
      * @return MessageDispatcher
      */
     public static MessageCenter getMessageCenter() {
         return MessageDispatcher.instance();
     }
 
-     /**
+    /**
      * 获取群组调度中心
+     *
      * @return MessageDispatcher
      */
     public static GroupCenter getGroupCenter() {
         return GroupDispatcher.instance();
     }
-
 
 
 }

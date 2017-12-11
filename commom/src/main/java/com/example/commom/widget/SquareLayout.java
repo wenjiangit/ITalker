@@ -8,7 +8,9 @@ import android.widget.FrameLayout;
 
 /**
  * 正方形的布局
- * Created by douliu on 2017/6/5.
+ *
+ * @author douliu
+ * @date 2017/6/5
  */
 
 public class SquareLayout extends FrameLayout{

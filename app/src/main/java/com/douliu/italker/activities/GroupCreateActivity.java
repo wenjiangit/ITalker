@@ -34,6 +34,9 @@ import java.io.File;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * @author wenjian
+ */
 public class GroupCreateActivity extends PresenterToolbarActivity<GroupCreateContract.Presenter>
         implements GroupCreateContract.View {
 
@@ -176,7 +179,9 @@ public class GroupCreateActivity extends PresenterToolbarActivity<GroupCreateCon
             return;
         }
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(focus.getWindowToken(), 0);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(focus.getWindowToken(), 0);
+        }
     }
 
     @Override

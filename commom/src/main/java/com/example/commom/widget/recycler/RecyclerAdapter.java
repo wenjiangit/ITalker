@@ -18,11 +18,13 @@ import butterknife.Unbinder;
 
 /**
  * 封装的RecyclerView的Adapter
- * Created by wenjian on 2017/6/2.
+ *
+ * @author wenjian
+ * @date 2017/6/2
  */
 
 public abstract class RecyclerAdapter<Data> extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder<Data>>
-        implements View.OnClickListener, View.OnLongClickListener,AdapterCallback<Data> {
+        implements View.OnClickListener, View.OnLongClickListener, AdapterCallback<Data> {
 
     private final List<Data> mDataList;
 
@@ -43,6 +45,7 @@ public abstract class RecyclerAdapter<Data> extends RecyclerView.Adapter<Recycle
 
     /**
      * 创建ViewHolder
+     *
      * @param parent
      * @param viewType 约定好viewType即为布局资源id
      * @return ViewHolder
@@ -73,8 +76,9 @@ public abstract class RecyclerAdapter<Data> extends RecyclerView.Adapter<Recycle
 
     /**
      * 获取item类型,其实就是xml的id
+     *
      * @param position 位置
-     * @param data 数据
+     * @param data     数据
      * @return xml的id
      */
     @LayoutRes
@@ -82,7 +86,8 @@ public abstract class RecyclerAdapter<Data> extends RecyclerView.Adapter<Recycle
 
     /**
      * 设置点击监听
-     * @param listener
+     *
+     * @param listener 点击监听
      */
     public void setAdapterListener(AdapterListener<Data> listener) {
         mListener = listener;
@@ -90,11 +95,12 @@ public abstract class RecyclerAdapter<Data> extends RecyclerView.Adapter<Recycle
 
     /**
      * 子类必须实现创建ViewHolder
-     * @param root item布局
+     *
+     * @param root     item布局
      * @param viewType 布局类型和资源id
      * @return ViewHolder
      */
-    protected abstract ViewHolder<Data> onCreateViewHolder(View root,int viewType);
+    protected abstract ViewHolder<Data> onCreateViewHolder(View root, int viewType);
 
     @Override
     public void onBindViewHolder(ViewHolder<Data> holder, int position) {
@@ -109,6 +115,7 @@ public abstract class RecyclerAdapter<Data> extends RecyclerView.Adapter<Recycle
 
     /**
      * 获取所有数据
+     *
      * @return List<Data>
      */
     public List<Data> getItems() {
@@ -126,6 +133,7 @@ public abstract class RecyclerAdapter<Data> extends RecyclerView.Adapter<Recycle
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void onClick(View v) {
         ViewHolder holder = (ViewHolder) v.getTag(R.id.tag_recycler_holder);
@@ -135,6 +143,7 @@ public abstract class RecyclerAdapter<Data> extends RecyclerView.Adapter<Recycle
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public boolean onLongClick(View v) {
         ViewHolder holder = (ViewHolder) v.getTag(R.id.tag_recycler_holder);
@@ -149,21 +158,34 @@ public abstract class RecyclerAdapter<Data> extends RecyclerView.Adapter<Recycle
 
     /**
      * 点击事件回调接口
+     *
      * @param <Data>
      */
     public interface AdapterListener<Data> {
+        /**
+         * item点击
+         *
+         * @param holder ViewHolder
+         * @param data   数据
+         */
         void onItemClick(RecyclerAdapter.ViewHolder<Data> holder, Data data);
 
+        /**
+         * item长点击
+         *
+         * @param holder ViewHolder
+         * @param data   数据
+         */
         void onItemLongClick(RecyclerAdapter.ViewHolder<Data> holder, Data data);
     }
-
 
 
     //****************************************数据更新操作******************************************//
 
     /**
      * 插入一条数据,并通知位置更新
-     * @param data
+     *
+     * @param data 数据
      */
     public void add(Data data) {
         mDataList.add(data);
@@ -172,7 +194,8 @@ public abstract class RecyclerAdapter<Data> extends RecyclerView.Adapter<Recycle
 
     /**
      * 插入一组数据,并通知更新
-     * @param dataList
+     *
+     * @param dataList 数据集
      */
     @SafeVarargs
     public final void add(Data... dataList) {
@@ -185,7 +208,8 @@ public abstract class RecyclerAdapter<Data> extends RecyclerView.Adapter<Recycle
 
     /**
      * 插入一个集合
-     * @param dataList
+     *
+     * @param dataList 数据集
      */
     public void add(Collection<Data> dataList) {
         if (dataList != null && dataList.size() > 0) {
@@ -204,7 +228,8 @@ public abstract class RecyclerAdapter<Data> extends RecyclerView.Adapter<Recycle
 
     /**
      * 替换所有的数据
-     * @param dataList
+     *
+     * @param dataList 数据集
      */
     public void replace(Collection<Data> dataList) {
         this.replace(dataList, true);
@@ -212,10 +237,11 @@ public abstract class RecyclerAdapter<Data> extends RecyclerView.Adapter<Recycle
 
     /**
      * 替换所有的数据,是否需要全局刷新
-     * @param dataList 新的数据
+     *
+     * @param dataList      新的数据
      * @param isFullRefresh 是否需要全局刷新
      */
-    public void replace(Collection<Data> dataList,boolean isFullRefresh) {
+    public void replace(Collection<Data> dataList, boolean isFullRefresh) {
         mDataList.clear();
         if (dataList != null && dataList.size() > 0) {
             mDataList.addAll(dataList);
@@ -227,7 +253,11 @@ public abstract class RecyclerAdapter<Data> extends RecyclerView.Adapter<Recycle
 
     //****************************************数据更新操作******************************************//
 
-
+    /**
+     * 自定义ViewHolder
+     *
+     * @param <Data>
+     */
     public static abstract class ViewHolder<Data> extends RecyclerView.ViewHolder {
 
         protected Unbinder unbinder;
@@ -246,6 +276,11 @@ public abstract class RecyclerAdapter<Data> extends RecyclerView.Adapter<Recycle
             onBind(data);
         }
 
+        /**
+         * 让holder自己去绑定数据
+         *
+         * @param data 数据
+         */
         public abstract void onBind(Data data);
 
         public void updateData(Data data) {
@@ -257,7 +292,11 @@ public abstract class RecyclerAdapter<Data> extends RecyclerView.Adapter<Recycle
 
     }
 
-    //点击监听器的一个实现类
+    /**
+     * 点击监听的默认实现
+     *
+     * @param <Data>
+     */
     public static abstract class AdapterListenerImpl<Data> implements AdapterListener<Data> {
 
         @Override

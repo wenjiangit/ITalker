@@ -30,7 +30,9 @@ import java.util.List;
 
 /**
  * 画廊
- * Created by douliu on 2017/6/5.
+ *
+ * @author douliu
+ * @date 2017/6/5
  */
 
 public class Gallery extends RecyclerView {
@@ -145,8 +147,12 @@ public class Gallery extends RecyclerView {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
 
             Image image = (Image) o;
 

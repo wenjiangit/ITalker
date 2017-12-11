@@ -8,7 +8,9 @@ import android.util.SparseArray;
 
 /**
  * 底部导航菜单辅助工具类
- * Created by wenjian on 2017/6/4.
+ *
+ * @author wenjian
+ * @date 2017/6/4
  */
 
 public class NavHelper<T> {

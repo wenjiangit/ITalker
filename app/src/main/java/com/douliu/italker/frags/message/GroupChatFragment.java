@@ -33,6 +33,7 @@ import butterknife.BindView;
 /**
  * 群聊界面
  * A simple {@link Fragment} subclass.
+ * @author wenjian
  */
 public class GroupChatFragment extends ChatFragment<Group>
         implements ChatContract.GroupView {

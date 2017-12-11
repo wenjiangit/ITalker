@@ -26,6 +26,7 @@ import butterknife.OnClick;
 /**
  * 单聊界面
  * A simple {@link Fragment} subclass.
+ * @author wenjian
  */
 public class UserChatFragment extends ChatFragment<User>
         implements MenuItem.OnMenuItemClickListener,

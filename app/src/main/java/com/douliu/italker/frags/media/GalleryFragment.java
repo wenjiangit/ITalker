@@ -96,7 +96,7 @@ public class GalleryFragment extends BottomSheetDialogFragment implements Galler
                 return;
             }
 
-            int screenHeight = UiTool.getScreenHeigh(getOwnerActivity());
+            int screenHeight = UiTool.getScreenHeight(getOwnerActivity());
             int statusHeight = UiTool.getStatusHeight(getOwnerActivity());
 
             int dialogHeight = screenHeight - statusHeight;

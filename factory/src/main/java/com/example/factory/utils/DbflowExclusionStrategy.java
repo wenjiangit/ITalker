@@ -7,7 +7,9 @@ import com.raizlabs.android.dbflow.structure.ModelAdapter;
 /**
  * Dbflow框架model字段过滤 Gson
  *
- * Created by wenjian on 2017/6/17.
+ *
+ * @author wenjian
+ * @date 2017/6/17
  */
 
 public class DbflowExclusionStrategy implements ExclusionStrategy {

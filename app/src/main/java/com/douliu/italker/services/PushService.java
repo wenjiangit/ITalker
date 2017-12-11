@@ -8,7 +8,9 @@ import com.igexin.sdk.GTServiceManager;
 
 /**
  *
- * Created by douliu on 2017/6/17.
+ *
+ * @author douliu
+ * @date 2017/6/17
  */
 
 public class PushService extends Service {
