@@ -23,23 +23,21 @@ import java.util.concurrent.Executors;
 
 public class GroupDispatcher implements GroupCenter {
 
-    private static GroupDispatcher instance;
-
-    //维护一个单线程池进行统一的线程调度
-    private static final Executor executor = Executors.newSingleThreadExecutor();
-
-    public static GroupDispatcher instance() {
-        if (instance == null) {
-            synchronized (GroupDispatcher.class) {
-                if (instance == null) {
-                    instance = new GroupDispatcher();
-                }
-            }
-        }
-        return instance;
-    }
+    /**
+     维护一个单线程池进行统一的线程调度
+     *
+     */
+    private static final Executor EXECUTOR = Executors.newSingleThreadExecutor();
 
     private GroupDispatcher() {
+    }
+
+    private static class Holder {
+        private static final GroupDispatcher INSTANCE = new GroupDispatcher();
+    }
+
+    public static GroupDispatcher getInstance() {
+        return Holder.INSTANCE;
     }
 
 
@@ -49,7 +47,7 @@ public class GroupDispatcher implements GroupCenter {
             return;
         }
 
-        executor.execute(new GroupCardHandler(cards));
+        EXECUTOR.execute(new GroupCardHandler(cards));
     }
 
     @Override
@@ -58,7 +56,7 @@ public class GroupDispatcher implements GroupCenter {
             return;
         }
 
-        executor.execute(new GroupMemberCardHandler(cards));
+        EXECUTOR.execute(new GroupMemberCardHandler(cards));
     }
 
 

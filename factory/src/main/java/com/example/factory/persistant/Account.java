@@ -12,7 +12,9 @@ import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 /**
  * 账户持久化信息
- * Created by douliu on 2017/6/16.
+ *
+ * @author wenjian
+ * @date 2017/6/16
  */
 
 public class Account {
@@ -31,18 +33,18 @@ public class Account {
 
     public static void save(Context context) {
         SharedPreferences sp = context.getSharedPreferences(Account.class.getName()
-                ,Context.MODE_PRIVATE);
+                , Context.MODE_PRIVATE);
         sp.edit().putString(KEY_PUSH_ID, pushId)
-                .putString(KEY_TOKEN,token)
-                .putString(KEY_USER_ID,userId)
-                .putString(KEY_ACCOUNT,account)
-                .putBoolean(KEY_IS_BIND,isBind)
+                .putString(KEY_TOKEN, token)
+                .putString(KEY_USER_ID, userId)
+                .putString(KEY_ACCOUNT, account)
+                .putBoolean(KEY_IS_BIND, isBind)
                 .apply();
     }
 
     public static void load(Context context) {
         SharedPreferences sp = context.getSharedPreferences(Account.class.getName()
-                ,Context.MODE_PRIVATE);
+                , Context.MODE_PRIVATE);
         pushId = sp.getString(KEY_PUSH_ID, "");
         token = sp.getString(KEY_TOKEN, "");
         userId = sp.getString(KEY_USER_ID, "");
@@ -60,7 +62,7 @@ public class Account {
     }
 
     public static boolean isLogin() {
-        return !TextUtils.isEmpty(userId)&&
+        return !TextUtils.isEmpty(userId) &&
                 !TextUtils.isEmpty(token);
     }
 
@@ -82,6 +84,7 @@ public class Account {
 
     /**
      * 个人信息是否完善
+     *
      * @return
      */
     public static boolean isComplete() {
@@ -118,7 +121,7 @@ public class Account {
      * @return User
      */
     public static User getUser() {
-        return TextUtils.isEmpty(userId)?new User():
+        return TextUtils.isEmpty(userId) ? new User() :
                 SQLite.select().from(User.class)
                         .where(User_Table.id.eq(userId))
                         .querySingle();

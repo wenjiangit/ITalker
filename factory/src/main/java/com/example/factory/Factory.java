@@ -32,6 +32,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @author wenjian
@@ -42,16 +43,14 @@ public class Factory {
 
     private static final String TAG = "Factory";
 
-
     private final Executor executor;
-
-    private static final Factory instance;
 
     private final Gson gson;
 
-    static {
-        instance = new Factory();
+    private static class Holder {
+        private static final Factory INSTANCE = new Factory();
     }
+
 
     private Factory() {
         executor = Executors.newFixedThreadPool(4);
@@ -71,16 +70,20 @@ public class Factory {
 
     }
 
+    public static Factory get() {
+        return Holder.INSTANCE;
+    }
+
     public static Application app() {
         return Application.getInstance();
     }
 
     public static void runOnBackground(Runnable runnable) {
-        instance.executor.execute(runnable);
+        get().executor.execute(runnable);
     }
 
     public static Gson getGson() {
-        return instance.gson;
+        return get().gson;
     }
 
     /**
@@ -221,7 +224,7 @@ public class Factory {
      * @return UserDispatcher
      */
     public static UserCenter getUserCenter() {
-        return UserDispatcher.instance();
+        return UserDispatcher.getInstance();
     }
 
     /**
@@ -230,7 +233,7 @@ public class Factory {
      * @return MessageDispatcher
      */
     public static MessageCenter getMessageCenter() {
-        return MessageDispatcher.instance();
+        return MessageDispatcher.getInstance();
     }
 
     /**
@@ -239,7 +242,7 @@ public class Factory {
      * @return MessageDispatcher
      */
     public static GroupCenter getGroupCenter() {
-        return GroupDispatcher.instance();
+        return GroupDispatcher.getInstance();
     }
 
 

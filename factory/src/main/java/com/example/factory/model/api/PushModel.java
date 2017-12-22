@@ -61,8 +61,9 @@ public class PushModel {
 
         try {
             List<Entity> entities = gson.fromJson(json, type);
-            if (entities.size() > 0)
+            if (entities.size() > 0) {
                 return new PushModel(entities);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -7,7 +7,12 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -34,7 +39,9 @@ import butterknife.OnClick;
 import static android.app.Activity.RESULT_OK;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 更新用户信息页
+ *
+ * @author wenjian
  */
 public class UpdateInfoFragment extends PresenterFragment<UpdateInfoContract.Presenter>
         implements UpdateInfoContract.View {
@@ -51,6 +58,8 @@ public class UpdateInfoFragment extends PresenterFragment<UpdateInfoContract.Pre
     Button mBtnSubmit;
     @BindView(R.id.loading)
     Loading mLoading;
+    @BindView(R.id.toolbar2)
+    Toolbar mToolbar;
 
     private String mPortraitFilePath;
 
@@ -64,6 +73,21 @@ public class UpdateInfoFragment extends PresenterFragment<UpdateInfoContract.Pre
     @Override
     protected int getContentLayoutId() {
         return R.layout.fragment_update_info;
+    }
+
+    @Override
+    protected void initWidget(View rootView) {
+        super.initWidget(rootView);
+        mToolbar.inflateMenu(R.menu.user_skip);
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                MainActivity.show(getContext());
+                getActivity().finish();
+                App.showToast("点击了。。。");
+                return true;
+            }
+        });
     }
 
     @OnClick(R.id.im_portrait)
@@ -158,6 +182,7 @@ public class UpdateInfoFragment extends PresenterFragment<UpdateInfoContract.Pre
 
     /**
      * 设置控件状态
+     *
      * @param enable 可否进行操作
      */
     private void setWidgetEnable(boolean enable) {

@@ -8,8 +8,8 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- *
- * Created by douliu on 2017/7/4.
+ * @author douliu
+ * @date 2017/7/4
  */
 public class MessageCreateModel {
 
@@ -92,7 +92,7 @@ public class MessageCreateModel {
     }
 
 
-    public static class Builder{
+    public static class Builder {
 
         private MessageCreateModel mModel;
 
@@ -100,7 +100,7 @@ public class MessageCreateModel {
             this.mModel = new MessageCreateModel();
         }
 
-        public Builder receiver(String receiverId,int receiverType) {
+        public Builder receiver(String receiverId, int receiverType) {
             this.mModel.receiverId = receiverId;
             this.mModel.receiverType = receiverType;
             return this;
@@ -121,7 +121,6 @@ public class MessageCreateModel {
             return mModel;
         }
     }
-
 
 
 }

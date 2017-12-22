@@ -6,11 +6,12 @@ import io.reactivex.disposables.Disposable;
 /**
  * Presenter的基类
  *
- * Created by wenjian on 2017/6/12.
+ * @author wenjian
+ * @date 2017/6/12
  */
 
 public abstract class BasePresenter<T extends BaseContract.View>
-        implements BaseContract.Presenter{
+        implements BaseContract.Presenter {
 
     private T mView;
 
@@ -22,6 +23,7 @@ public abstract class BasePresenter<T extends BaseContract.View>
 
     /**
      * 将presenter与view进行双向绑定
+     *
      * @param view View
      */
     @SuppressWarnings("unchecked")
@@ -32,6 +34,7 @@ public abstract class BasePresenter<T extends BaseContract.View>
 
     /**
      * 给子类使用
+     *
      * @return View
      */
     public final T getView() {
@@ -49,7 +52,6 @@ public abstract class BasePresenter<T extends BaseContract.View>
     protected void addDisposable(Disposable disposable) {
         mCompositeDisposable.add(disposable);
     }
-
 
 
     /**

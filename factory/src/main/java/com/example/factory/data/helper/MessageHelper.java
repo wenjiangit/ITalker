@@ -16,8 +16,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- *
- * Created by douliu on 2017/6/28.
+ * @author douliu
+ * @date 2017/6/28
  */
 
 public class MessageHelper {
@@ -76,7 +76,7 @@ public class MessageHelper {
         return SQLite.select()
                 .from(Message.class)
                 .where(Message_Table.group_id.eq(groupId))
-                .orderBy(Message_Table.createAt,false)
+                .orderBy(Message_Table.createAt, false)
                 .querySingle();
     }
 
@@ -87,7 +87,7 @@ public class MessageHelper {
                         .and(Message_Table.group_id.isNull())
                         .and(Message_Table.sender_id.eq(userId)))
                 .or(Message_Table.receiver_id.eq(userId))
-                .orderBy(Message_Table.createAt,false)
+                .orderBy(Message_Table.createAt, false)
                 .querySingle();
     }
 

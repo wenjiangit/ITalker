@@ -51,18 +51,22 @@ public class User extends BaseDbModel<User> implements Author {
     @Column
     private Date modifyAt;
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public void setId(String id) {
         this.id = id;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
@@ -75,18 +79,22 @@ public class User extends BaseDbModel<User> implements Author {
         this.phone = phone;
     }
 
+    @Override
     public String getPortrait() {
         return portrait;
     }
 
+    @Override
     public void setPortrait(String portrait) {
         this.portrait = portrait;
     }
 
+    @Override
     public String getDesc() {
         return desc;
     }
 
+    @Override
     public void setDesc(String desc) {
         this.desc = desc;
     }

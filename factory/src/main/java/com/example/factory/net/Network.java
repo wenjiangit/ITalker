@@ -22,7 +22,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * 网络请求
  * <p>
- * Created by wenjian on 2017/6/14.
+ *
+ * @author wenjian
+ * @date 2017/6/14
  */
 
 public class Network {
@@ -33,11 +35,11 @@ public class Network {
     }
 
     private static class InstanceHolder {
-        private static final Network instance = new Network();
+        private static final Network INSTANCE = new Network();
     }
 
     private static Network instance() {
-        return InstanceHolder.instance;
+        return InstanceHolder.INSTANCE;
     }
 
     /**

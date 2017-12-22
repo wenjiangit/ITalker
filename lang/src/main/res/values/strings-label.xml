@@ -47,4 +47,6 @@
 
     <string name="toast_download_error">下载失败!</string>
     <string name="label_login_out">退出登录</string>
+
+    <string name="label_skip">跳过</string>
 </resources>

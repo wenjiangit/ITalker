@@ -15,7 +15,9 @@ import java.util.List;
 
 /**
  * 基础的数据库仓库
- * Created by wenjian on 2017/7/2.
+ *
+ * @author wenjian
+ * @date 2017/7/2
  */
 
 public abstract class BaseDbRepository<Data extends BaseDbModel<Data>>

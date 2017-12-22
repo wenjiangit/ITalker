@@ -16,23 +16,25 @@ import com.raizlabs.android.dbflow.structure.database.transaction.ITransaction;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 数据库的辅助类
  * 封装数据库的增删改操作
- * Created by douliu on 2017/6/27.
+ *
+ * @author douliu
+ * @date 2017/6/27
  */
 
 public class DbHelper {
 
-    private static final DbHelper instance;
+    private static final DbHelper INSTANCE;
 
     static {
-        instance = new DbHelper();
+        INSTANCE = new DbHelper();
     }
 
     private DbHelper() {
@@ -41,11 +43,11 @@ public class DbHelper {
     /**
      * 监听器的集合
      */
-    private static final Map<Class<?>, Set<ChangeListener>> mChangeListeners = new Hashtable<>();
+    private static final Map<Class<?>, Set<ChangeListener>> CHANGE_LISTENERS = new ConcurrentHashMap<>();
 
     private <Model extends BaseModel> Set<ChangeListener> getListeners(Class<Model> clazz) {
-        if (mChangeListeners.containsKey(clazz)) {
-            return mChangeListeners.get(clazz);
+        if (CHANGE_LISTENERS.containsKey(clazz)) {
+            return CHANGE_LISTENERS.get(clazz);
         }
         return null;
     }
@@ -59,10 +61,10 @@ public class DbHelper {
      */
     public static <Model extends BaseModel> void addChangeListener(Class<Model> clazz,
                                                                    ChangeListener<Model> listener) {
-        Set<ChangeListener> changeListeners = instance.getListeners(clazz);
+        Set<ChangeListener> changeListeners = INSTANCE.getListeners(clazz);
         if (changeListeners == null) {
             changeListeners = new HashSet<>();
-            mChangeListeners.put(clazz, changeListeners);
+            CHANGE_LISTENERS.put(clazz, changeListeners);
         }
         changeListeners.add(listener);
     }
@@ -76,7 +78,7 @@ public class DbHelper {
      */
     public static <Model extends BaseModel> void removeChangeListener(Class<Model> clazz,
                                                                       ChangeListener<Model> listener) {
-        Set<ChangeListener> listeners = instance.getListeners(clazz);
+        Set<ChangeListener> listeners = INSTANCE.getListeners(clazz);
         if (listeners != null && listeners.contains(listener)) {
             listeners.remove(listener);
         }
@@ -102,7 +104,7 @@ public class DbHelper {
             public void execute(DatabaseWrapper databaseWrapper) {
                 FlowManager.getModelAdapter(clazz)
                         .saveAll(Arrays.asList(models));
-                instance.notifySave(clazz, models);
+                INSTANCE.notifySave(clazz, models);
             }
         }).build().execute();
     }
@@ -126,7 +128,7 @@ public class DbHelper {
             public void execute(DatabaseWrapper databaseWrapper) {
                 FlowManager.getModelAdapter(clazz)
                         .deleteAll(Arrays.asList(models));
-                instance.notifyDelete(clazz, models);
+                INSTANCE.notifyDelete(clazz, models);
             }
         }).build().execute();
     }
@@ -141,7 +143,7 @@ public class DbHelper {
      */
     @SuppressWarnings("unchecked")
     private <Model extends BaseModel> void notifySave(final Class<Model> clazz, final Model... models) {
-        Set<ChangeListener> changeListeners = instance.getListeners(clazz);
+        Set<ChangeListener> changeListeners = INSTANCE.getListeners(clazz);
         if (changeListeners != null && changeListeners.size() > 0) {
             for (ChangeListener listener : changeListeners) {
                 //通用的通知
@@ -179,7 +181,7 @@ public class DbHelper {
             @Override
             public void execute(DatabaseWrapper databaseWrapper) {
                 ModelAdapter<Session> adapter = FlowManager.getModelAdapter(Session.class);
-                Session [] sessions = new Session[identifies.size()];
+                Session[] sessions = new Session[identifies.size()];
                 int index = 0;
                 for (Session.Identify identify : identifies) {
                     //从本地查找会话记录
@@ -198,7 +200,7 @@ public class DbHelper {
                 }
 
                 //再次通知更新
-                notifySave(Session.class,sessions);
+                notifySave(Session.class, sessions);
             }
         }).build().execute();
 
@@ -242,7 +244,7 @@ public class DbHelper {
      */
     @SuppressWarnings("unchecked")
     private <Model extends BaseModel> void notifyDelete(final Class<Model> clazz, final Model... models) {
-        Set<ChangeListener> changeListeners = instance.getListeners(clazz);
+        Set<ChangeListener> changeListeners = INSTANCE.getListeners(clazz);
         if (changeListeners != null) {
             for (ChangeListener listener : changeListeners) {
                 listener.onDataDelete(models);

@@ -12,29 +12,30 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 /**
+ * 用户数据分发
  *
- * Created by douliu on 2017/6/27.
+ * @author douliu
+ * @date 2017/6/27
  */
 
 public class UserDispatcher implements UserCenter{
 
-    private static UserDispatcher instance;
+    /**
+     *  维护一个单线程池进行统一的线程调度
+     */
+    private static final Executor EXECUTOR = Executors.newSingleThreadExecutor();
 
-    //维护一个单线程池进行统一的线程调度
-    private static final Executor executor = Executors.newSingleThreadExecutor();
-
-    public static UserDispatcher instance() {
-        if (instance == null) {
-            synchronized (UserDispatcher.class) {
-                if (instance == null) {
-                    instance = new UserDispatcher();
-                }
-            }
-        }
-        return instance;
+    private UserDispatcher() {
     }
 
-    private UserDispatcher(){}
+    private static class Holder {
+        private static final UserDispatcher INSTANCE = new UserDispatcher();
+    }
+
+    public static UserDispatcher getInstance() {
+        return Holder.INSTANCE;
+    }
+
 
     @Override
     public void dispatch(UserCard... userCards) {
@@ -43,7 +44,7 @@ public class UserDispatcher implements UserCenter{
         }
 
         //把数据扔进线程进行异步处理
-        executor.execute(new UserCardHandler(userCards));
+        EXECUTOR.execute(new UserCardHandler(userCards));
 
     }
 

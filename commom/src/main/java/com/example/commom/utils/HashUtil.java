@@ -16,7 +16,7 @@ import java.security.NoSuchAlgorithmException;
  * GitHub:https://github.com/qiujuer/Genius-Android/blob/steady/steady/library/src/main/java/net/qiujuer/genius/util/HashUtils.java
  */
 public class HashUtil {
-    private static final char HEX_DIGITS[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+    private static final char[] HEX_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'a', 'b', 'c', 'd', 'e', 'f'};
 
     private static String convertToHexString(byte[] b) {

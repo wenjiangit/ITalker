@@ -22,7 +22,8 @@ import retrofit2.Response;
 /**
  * 账户帮助类
  *
- * Created by douliu on 2017/6/13.
+ * @author douliu
+ * @date 2017/6/13
  */
 
 public class AccountHelper {
@@ -31,7 +32,8 @@ public class AccountHelper {
 
     /**
      * 注册
-     * @param model RegisterModel
+     *
+     * @param model    RegisterModel
      * @param callback 回调
      */
     public static void register(RegisterModel model, final DataSource.Callback<User> callback) {
@@ -41,12 +43,13 @@ public class AccountHelper {
 
     /**
      * 处理返回结果
+     *
      * @param response Response
      * @param callback 回调
      */
     private static void processResponse(Response<RspModel<AccountRspModel>> response, DataSource.Callback<User> callback) {
         RspModel<AccountRspModel> rspModel = response.body();
-        Log.i(TAG, "processResponse: "+rspModel);
+        Log.i(TAG, "processResponse: " + rspModel);
         if (rspModel.success()) {
             AccountRspModel accountRspModel = rspModel.getResult();
             User user = accountRspModel.getUser();
@@ -70,6 +73,7 @@ public class AccountHelper {
 
     /**
      * 进行pushId的绑定
+     *
      * @param callback 回调
      */
     public static void bindPush(DataSource.Callback<User> callback) {
@@ -84,7 +88,8 @@ public class AccountHelper {
 
     /**
      * 登录
-     * @param model 登录的model
+     *
+     * @param model    登录的model
      * @param callback 回调
      */
     public static void login(LoginModel model, final DataSource.Callback<User> callback) {
@@ -97,7 +102,7 @@ public class AccountHelper {
     /**
      * 对账户操作返回进行统一处理
      */
-    private static class AccountRspCallback implements Callback<RspModel<AccountRspModel>>{
+    private static class AccountRspCallback implements Callback<RspModel<AccountRspModel>> {
         DataSource.Callback<User> callback;
 
         AccountRspCallback(DataSource.Callback<User> callback) {

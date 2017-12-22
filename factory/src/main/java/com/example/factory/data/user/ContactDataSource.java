@@ -4,10 +4,10 @@ import com.example.commom.factory.data.DbDataSource;
 import com.example.factory.model.db.User;
 
 /**
- *
- * Created by wenjian on 2017/7/2.
+ * @author wenjian
+ * @date 2017/7/2
  */
 
-public interface ContactDataSource extends DbDataSource<User>{
+public interface ContactDataSource extends DbDataSource<User> {
 
 }

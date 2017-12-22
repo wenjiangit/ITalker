@@ -10,7 +10,9 @@ import net.qiujuer.genius.kit.handler.runable.Action;
 import java.util.List;
 
 /**
- * Created by douliu on 2017/6/29.
+ *
+ * @author douliu
+ * @date 2017/6/29
  */
 
 public class BaseRecyclerPresenter<Model, View extends BaseContract.RecyclerView> extends BasePresenter<View> {

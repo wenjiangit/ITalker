@@ -10,17 +10,17 @@ import com.example.factory.model.db.User;
 
 public class AccountRspModel {
 
-    private User userCard;
+    private User user;
     private String account;
     private String token;
     private boolean isBind;
 
     public User getUser() {
-        return userCard;
+        return user;
     }
 
     public void setUser(User user) {
-        this.userCard = user;
+        this.user = user;
     }
 
     public String getAccount() {
@@ -50,7 +50,7 @@ public class AccountRspModel {
     @Override
     public String toString() {
         return "AccountRspModel{" +
-                "user=" + userCard +
+                "user=" + user +
                 ", account='" + account + '\'' +
                 ", token='" + token + '\'' +
                 ", isBind=" + isBind +

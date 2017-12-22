@@ -95,7 +95,7 @@ public class MainActivity extends BaseActivity implements
                     }
                 });
 
-        mImPortrait.setup(Glide.with(this),Account.getUser());
+        mImPortrait.setup(Glide.with(this), Account.getUser());
     }
 
 
@@ -123,7 +123,9 @@ public class MainActivity extends BaseActivity implements
                 }
                 break;
             case R.id.im_portrait:
-                PersonalActivity.show(this,Account.getUserId());
+                PersonalActivity.show(this, Account.getUserId());
+                break;
+            default:
                 break;
         }
     }

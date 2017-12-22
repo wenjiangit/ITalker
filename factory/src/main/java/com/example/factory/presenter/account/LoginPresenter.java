@@ -18,7 +18,8 @@ import net.qiujuer.genius.kit.handler.runable.Action;
 /**
  * 登录的Presenter
  *
- * Created by douliu on 2017/6/13.
+ * @author douliu
+ * @date 2017/6/13
  */
 
 public class LoginPresenter extends BasePresenter<LoginContract.View>
@@ -49,7 +50,6 @@ public class LoginPresenter extends BasePresenter<LoginContract.View>
 
     private void doLogin(LoginModel model) {
         AccountHelper.login(model, this);
-
     }
 
     @Override

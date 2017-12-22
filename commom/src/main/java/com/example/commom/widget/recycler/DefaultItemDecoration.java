@@ -10,7 +10,9 @@ import android.view.View;
 
 /**
  * 默认的分割线,使用系统的listDivider
- * Created by douliu on 2017/5/12.
+ *
+ * @author douliu
+ * @date 2017/5/12
  */
 
 public class DefaultItemDecoration extends RecyclerView.ItemDecoration {

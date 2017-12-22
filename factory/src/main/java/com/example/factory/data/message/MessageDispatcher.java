@@ -20,21 +20,28 @@ import java.util.concurrent.Executors;
 /**
  * 消息统一分发处理
  * <p>
- * Created by douliu on 2017/6/27.
+ *
+ * @author douliu
+ * @date 2017/6/27
  */
 
 public class MessageDispatcher implements MessageCenter {
 
-    //维护一个单线程池进行统一的线程调度
-    private static final Executor executor = Executors.newSingleThreadExecutor();
 
-    public static MessageDispatcher instance() {
-        return InstanceHolder.instance;
+    /**
+     * 维护一个单线程池进行统一的线程调度
+     */
+    private static final Executor EXECUTOR = Executors.newSingleThreadExecutor();
+
+    public static MessageDispatcher getInstance() {
+        return InstanceHolder.INSTANCE;
     }
 
-    //静态内部类实现单例
-    private static class InstanceHolder{
-        private static MessageDispatcher instance = new MessageDispatcher();
+    /**
+     * 静态内部类实现单例
+     */
+    private static class InstanceHolder {
+        private static final MessageDispatcher INSTANCE = new MessageDispatcher();
     }
 
     private MessageDispatcher() {
@@ -46,7 +53,7 @@ public class MessageDispatcher implements MessageCenter {
         if (cards == null || cards.length == 0) {
             return;
         }
-        executor.execute(new MessageHandler(cards));
+        EXECUTOR.execute(new MessageHandler(cards));
     }
 
     static class MessageHandler implements Runnable {

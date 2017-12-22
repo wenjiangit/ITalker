@@ -4,13 +4,13 @@ import android.text.Editable;
 import android.text.TextWatcher;
 
 /**
- *
+ * TextWatcherAdapter
  *
  * @author douliu
  * @date 2017/7/6
  */
 
-public class TextWatcherAdapter implements TextWatcher{
+public class TextWatcherAdapter implements TextWatcher {
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 

@@ -1,12 +1,9 @@
 package com.douliu.italker.frags.search;
 
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,18 +16,13 @@ import com.example.commom.widget.EmptyView;
 import com.example.commom.widget.PortraitView;
 import com.example.commom.widget.recycler.RecyclerAdapter;
 import com.example.factory.model.card.GroupCard;
-import com.example.factory.model.card.UserCard;
-import com.example.factory.presenter.contact.FollowContract;
-import com.example.factory.presenter.contact.FollowPresenter;
 import com.example.factory.presenter.search.GroupSearchPresenter;
 import com.example.factory.presenter.search.SearchContract;
 
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * 群搜索界面

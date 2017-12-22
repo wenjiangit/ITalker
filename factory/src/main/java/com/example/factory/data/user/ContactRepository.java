@@ -12,14 +12,14 @@ import com.raizlabs.android.dbflow.structure.database.transaction.QueryTransacti
 import java.util.List;
 
 /**
- *
- * Created by wenjian on 2017/7/2.
+ * @author wenjian
+ * @date 2017/7/2
  */
 
 public class ContactRepository extends BaseDbRepository<User> implements
         ContactDataSource,
         QueryTransaction.QueryResultListCallback<User>,
-        DbHelper.ChangeListener<User>{
+        DbHelper.ChangeListener<User> {
     @Override
     public void load(DataSource.SucceedCallback<List<User>> callback) {
         super.load(callback);

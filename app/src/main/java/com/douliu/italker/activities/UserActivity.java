@@ -18,6 +18,9 @@ import com.example.commom.app.BaseActivity;
 
 import butterknife.BindView;
 
+/**
+ * @author wenjian
+ */
 public class UserActivity extends BaseActivity {
 
     @BindView(R.id.im_bg)

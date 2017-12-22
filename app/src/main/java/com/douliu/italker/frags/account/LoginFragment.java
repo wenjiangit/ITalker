@@ -63,6 +63,7 @@ public class LoginFragment extends PresenterFragment<LoginContract.Presenter>
         String password = mEditPassword.getText().toString();
         mPresenter.login(phone, password);
         setWidgetEnable(false);
+//        MainActivity.show(getContext());
     }
 
     @OnClick(R.id.tv_register)
