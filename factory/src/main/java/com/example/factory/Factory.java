@@ -62,7 +62,7 @@ public class Factory {
 
     public static void setup() {
         //将xml持久化数据读取到缓存
-        Account.load(app());
+        Account.load();
         //数据库的初始化
         FlowManager.init(new FlowConfig.Builder(app())
                 .openDatabasesOnInit(true)//在数据库初始化的时候打开
@@ -154,8 +154,7 @@ public class Factory {
     public static void logout() {
         //清除数据库和缓存信息
         FlowManager.destroy();
-        SharedPreferences preferences = app().getSharedPreferences(Account.class.getName(), Context.MODE_PRIVATE);
-        preferences.edit().clear().apply();
+        Account.logout();
     }
 
     /**

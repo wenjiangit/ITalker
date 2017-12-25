@@ -8,7 +8,8 @@ import com.example.commom.widget.invention.PlaceHolderView;
 /**
  * mvp中fragment作为view的基类
  *
- * Created by wenjian on 2017/6/12.
+ * @author wenjian
+ * @date 2017/6/12
  */
 
 public abstract class PresenterFragment<P extends BaseContract.Presenter> extends BaseFragment

@@ -19,6 +19,8 @@ import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 public class Account {
 
+    private static final String TAG = "Account";
+
     private static final String KEY_PUSH_ID = "key_push_id";
     private static final String KEY_USER_ID = "key_user_id";
     private static final String KEY_TOKEN = "key_token";
@@ -31,9 +33,12 @@ public class Account {
     private static String account;
     private static boolean isBind;
 
-    public static void save(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(Account.class.getName()
-                , Context.MODE_PRIVATE);
+    private static SharedPreferences getSp() {
+        return Factory.app().getSharedPreferences(TAG, Context.MODE_PRIVATE);
+    }
+
+    public static void save() {
+        SharedPreferences sp = getSp();
         sp.edit().putString(KEY_PUSH_ID, pushId)
                 .putString(KEY_TOKEN, token)
                 .putString(KEY_USER_ID, userId)
@@ -42,9 +47,8 @@ public class Account {
                 .apply();
     }
 
-    public static void load(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(Account.class.getName()
-                , Context.MODE_PRIVATE);
+    public static void load() {
+        SharedPreferences sp = getSp();
         pushId = sp.getString(KEY_PUSH_ID, "");
         token = sp.getString(KEY_TOKEN, "");
         userId = sp.getString(KEY_USER_ID, "");
@@ -58,7 +62,7 @@ public class Account {
 
     public static void setBind(boolean isBind) {
         Account.isBind = isBind;
-        save(Factory.app());
+        save();
     }
 
     public static boolean isLogin() {
@@ -99,7 +103,12 @@ public class Account {
 
     public static void setPushId(String pushId) {
         Account.pushId = pushId;
-        save(Factory.app());
+        save();
+    }
+
+
+    public static void logout() {
+        getSp().edit().clear().apply();
     }
 
     /**
@@ -112,7 +121,7 @@ public class Account {
         userId = model.getUser().getId();
         account = model.getAccount();
         isBind = model.isBind();
-        save(Factory.app());
+        save();
     }
 
     /**

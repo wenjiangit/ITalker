@@ -3,7 +3,8 @@ package com.example.commom.net.model;
 /**
  * 注册model
  *
- * Created by douliu on 2017/6/13.
+ * @author douliu
+ * @date 2017/6/13
  */
 
 public class RegisterModel {

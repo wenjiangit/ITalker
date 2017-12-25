@@ -17,7 +17,8 @@ import java.util.Date;
 /**
  * 上传到oss对象存储帮助类
  *
- * Created by wenjian on 2017/6/9.
+ * @author wenjian
+ * @date 2017/6/9
  */
 
 public class UploadHelper {
@@ -37,7 +38,8 @@ public class UploadHelper {
 
     /**
      * 上传
-     * @param objectKey key
+     *
+     * @param objectKey      key
      * @param uploadFilePath 文件路径
      * @return 服务器存储地址
      */
@@ -64,6 +66,7 @@ public class UploadHelper {
 
     /**
      * 上传普通图片
+     *
      * @param path 本地路径
      * @return 服务器路径
      */
@@ -74,6 +77,7 @@ public class UploadHelper {
 
     /**
      * 上传头像
+     *
      * @param path 本地路径
      * @return 服务器路径
      */
@@ -84,6 +88,7 @@ public class UploadHelper {
 
     /**
      * 上传音频
+     *
      * @param path 本地路径
      * @return 服务器路径
      */
@@ -95,6 +100,7 @@ public class UploadHelper {
 
     /**
      * 创建图片存储键
+     *
      * @param path 本地路径
      * @return image/201707/2d92dd0adjadpaf.jpg
      */
@@ -107,6 +113,7 @@ public class UploadHelper {
 
     /**
      * 创建头像存储键
+     *
      * @param path 本地路径
      * @return portrait/201707/2d92dd0adjadpaf.jpg
      */
@@ -117,9 +124,9 @@ public class UploadHelper {
     }
 
 
-
     /**
      * 创建音频存储键
+     *
      * @param path 本地路径
      * @return audio/201707/2d92dd0adjadpaf.mp3
      */
@@ -131,7 +138,8 @@ public class UploadHelper {
 
     /**
      * 按月存储
-     * @return 格式化的日期字符串,形如:201705
+     *
+     * @return 格式化的日期字符串, 形如:201705
      */
     private static String getDateString() {
         return DateFormat.format("yyyyMM", new Date()).toString();
@@ -139,6 +147,7 @@ public class UploadHelper {
 
     /**
      * 获取语音本地存储路径
+     *
      * @param isTemp 是否是临时的
      * @return
      */

@@ -18,6 +18,8 @@ import butterknife.OnClick;
 
 /**
  * 登录fragment
+ *
+ * @author wenjian
  */
 public class LoginFragment extends PresenterFragment<LoginContract.Presenter>
         implements LoginContract.View {
@@ -91,6 +93,7 @@ public class LoginFragment extends PresenterFragment<LoginContract.Presenter>
 
     /**
      * 设置控件状态
+     *
      * @param enable 可否进行操作
      */
     private void setWidgetEnable(boolean enable) {

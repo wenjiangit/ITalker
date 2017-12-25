@@ -19,6 +19,7 @@ import butterknife.OnClick;
 
 /**
  * RegisterFragment
+ *
  * @author wenjian
  */
 public class RegisterFragment extends PresenterFragment<RegisterContract.Presenter>
@@ -85,6 +86,7 @@ public class RegisterFragment extends PresenterFragment<RegisterContract.Present
 
     /**
      * 设置控件状态
+     *
      * @param enable 可否进行操作
      */
     private void setWidgetEnable(boolean enable) {

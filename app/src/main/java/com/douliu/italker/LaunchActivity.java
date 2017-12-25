@@ -17,8 +17,16 @@ import com.douliu.italker.frags.assist.PermissionsFragment;
 import com.example.commom.app.BaseActivity;
 import com.example.factory.persistant.Account;
 
-import butterknife.BindView;
+import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+
+/**
+ * @author wenjian
+ */
 public class LaunchActivity extends BaseActivity {
 
     private ColorDrawable mBgDrawable;
@@ -75,13 +83,21 @@ public class LaunchActivity extends BaseActivity {
                 return;
             }
         }
-        getWindow().getDecorView().postDelayed(new Runnable() {
+/*        getWindow().getDecorView().postDelayed(new Runnable() {
             @Override
             public void run() {
                 waitPushReceiverId();
             }
-        }, 500);
+        }, 500);*/
 
+        Observable.timer(500, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        waitPushReceiverId();
+                    }
+                });
     }
 
 
@@ -96,6 +112,7 @@ public class LaunchActivity extends BaseActivity {
 
     /**
      * 开始动画
+     *
      * @param fraction 动画进度
      * @param callback 完成时的回调
      */
@@ -105,7 +122,7 @@ public class LaunchActivity extends BaseActivity {
         int endColor = ContextCompat.getColor(this, R.color.white);
         int evaluate = (int) evaluator.evaluate(fraction, mStartColor, endColor);
 
-        ValueAnimator valueAnimator = ObjectAnimator.ofObject(this,mProperty,evaluator,evaluate);
+        ValueAnimator valueAnimator = ObjectAnimator.ofObject(this, mProperty, evaluator, evaluate);
 
         valueAnimator.setIntValues(mBgDrawable.getColor(), evaluate);
         valueAnimator.setDuration(1500);
@@ -120,10 +137,10 @@ public class LaunchActivity extends BaseActivity {
     }
 
     /**
-     *  提供对应属性的get and set
+     * 提供对应属性的get and set
      */
-    private final Property<LaunchActivity,Integer> mProperty = new Property<LaunchActivity, Integer>(Integer.class,
-           "color") {
+    private final Property<LaunchActivity, Integer> mProperty = new Property<LaunchActivity, Integer>(Integer.class,
+            "color") {
         @Override
         public Integer get(LaunchActivity object) {
             return object.mBgDrawable.getColor();
@@ -136,7 +153,7 @@ public class LaunchActivity extends BaseActivity {
     };
 
     /**
-     *  真正的跳转操作
+     * 真正的跳转操作
      */
     private void reallySkip() {
         if (PermissionsFragment.hasAllPerm(this, getSupportFragmentManager())) {
@@ -150,7 +167,7 @@ public class LaunchActivity extends BaseActivity {
     }
 
     /**
-     *  继续没完成的动画
+     * 继续没完成的动画
      */
     private void skip() {
         startAnim(1f, new Runnable() {

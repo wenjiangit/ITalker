@@ -3,4 +3,7 @@
     <item name="toolbar" type="id" />
     <item name="default_portrait" type="drawable" />
     <item name="tag_recycler_holder" type="id" />
+
+
+    <item name="setting_logout" type="id"/>
 </resources>
